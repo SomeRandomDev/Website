@@ -8,7 +8,7 @@
 </head>
 <body>
     <main>
-        <h1>I love <a href="html\about">you</a> so much Kim</h1>    
+        <h1>I love <a href="about">you</a> so much Kim</h1>    
     </main>
     </body>
 </html>
