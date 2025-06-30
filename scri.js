@@ -1,6 +1,6 @@
 gsap.to("rect", {
   motionPath: "path",
-  duration: 2,
+  duration: 0.2,
   ease: "none",
   repeat: -1
 });
