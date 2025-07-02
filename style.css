@@ -29,6 +29,8 @@ body {
 
 section {
   background-color: blueviolet;
+  width: 90vw;
+  height: 90vh;
 }
 
 div {
