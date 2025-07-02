@@ -27,7 +27,7 @@ body {
   overflow:visible;
 }
 
-.div {
+div {
   height: 100%;
   width: 100%;
   background-color: antiquewhite;
