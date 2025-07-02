@@ -33,6 +33,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: aqua;
   font-size: 2rem;
   scroll-snap-align: start; /* Optional: for snap scrolling */
 }
