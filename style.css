@@ -32,4 +32,7 @@ div {
   width: 100%;
   background-color: antiquewhite;
   color: blue;
+  font-family: Mori;
+  display: flex;
+  
 }
