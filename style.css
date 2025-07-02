@@ -26,3 +26,9 @@ body {
   max-width:750px;
   overflow:visible;
 }
+
+.div {
+  height: 100%;
+  width: 100%;
+  background-color: antiquewhite;
+}
