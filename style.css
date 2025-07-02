@@ -27,15 +27,23 @@ body {
   overflow:visible;
 }
 
-section {
-  background-color: blueviolet;
+.section {
+  height: 100vh; /* Full viewport height */
+  width: 100vw;  /* Full viewport width (optional if you want full width) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  scroll-snap-align: start; /* Optional: for snap scrolling */
 }
 
-div {
-  width: 90vw;
-  height: 90vh;
-  color: blue;
-  font-family: Mori;
-  display: flex;
-
+/* Optional: Give each section a background color for visibility */
+.section:nth-child(1) {
+   background: lightcoral;
+  }
+.section:nth-child(2) {
+   background: lightblue;
+  }
+.section:nth-child(3) {
+   background: lightgreen; 
 }
