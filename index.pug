@@ -48,9 +48,9 @@ html
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
         countdownEl.innerHTML = `
-          ${days} ${pluralize(days, 'Day', 'Days')}<br>
-          ${hours.toString().padStart(2, '0')} ${pluralize(hours, 'Hour', 'Hours')}<br>
-          ${minutes.toString().padStart(2, '0')} ${pluralize(minutes, 'Minute', 'Minutes')}<br>
+          ${days} ${pluralize(days, 'Day', 'Days')}
+          ${hours.toString().padStart(2, '0')} ${pluralize(hours, 'Hour', 'Hours')}
+          ${minutes.toString().padStart(2, '0')} ${pluralize(minutes, 'Minute', 'Minutes')}
           ${seconds.toString().padStart(2, '0')} ${pluralize(seconds, 'Second', 'Seconds')}
         `;
       };
