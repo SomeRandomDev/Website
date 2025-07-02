@@ -29,13 +29,11 @@ body {
 
 section {
   background-color: blueviolet;
-  width: 90vw;
-  height: 90vh;
 }
 
 div {
-  height: 100%;
-  width: 100%;
+  width: 90vw;
+  height: 90vh;
   color: blue;
   font-family: Mori;
   display: flex;
