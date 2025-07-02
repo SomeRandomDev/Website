@@ -18,27 +18,26 @@ html
       }
       #countdown {
         text-align: center;
+        line-height: 2.5rem;
       }
 
   body
     #countdown
-      span#days 0
-      |  Days 
-      span#hours 0
-      |  Hours 
-      span#minutes 0
-      |  Minutes 
-      span#seconds 0
-      |  Seconds
 
     script.
+      function pluralize(value, singular, plural) {
+        return value === 1 ? singular : plural;
+      }
+
       const countdown = () => {
-        const targetDate = new Date('2025-07-04T12:00:00'); // 🇺🇸 July 4th at 12:00
+        const targetDate = new Date('2025-07-04T12:00:00');
         const now = new Date();
         const diff = targetDate - now;
 
+        const countdownEl = document.getElementById('countdown');
+
         if (diff <= 0) {
-          document.getElementById('countdown').innerHTML = "🎆 Happy 4th of July!";
+          countdownEl.innerHTML = "🎆 Happy 4th of July!";
           clearInterval(timer);
           return;
         }
@@ -48,11 +47,13 @@ html
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-        document.getElementById('days').textContent = days;
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        countdownEl.innerHTML = `
+          ${days} ${pluralize(days, 'Day', 'Days')}<br>
+          ${hours.toString().padStart(2, '0')} ${pluralize(hours, 'Hour', 'Hours')}<br>
+          ${minutes.toString().padStart(2, '0')} ${pluralize(minutes, 'Minute', 'Minutes')}<br>
+          ${seconds.toString().padStart(2, '0')} ${pluralize(seconds, 'Second', 'Seconds')}
+        `;
       };
 
       const timer = setInterval(countdown, 1000);
-      countdown(); // Initial call
+      countdown();
