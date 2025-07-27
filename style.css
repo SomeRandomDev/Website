@@ -1,0 +1,42 @@
+/* Reset basic styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set full screen dark background */
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: #121212; /* deep dark gray */
+  color: #f0f0f0; /* light text for contrast */
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centered container for audio + message */
+#audio-container {
+  text-align: center;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Style the audio player */
+#audio-container audio {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 1rem;
+  filter: brightness(0.9);
+}
+
+/* Optional: message above or below the player */
+#audio-container h1 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #cccccc;
+}
