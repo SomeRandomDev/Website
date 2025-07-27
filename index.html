@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Countdown to July 4th</title>
+    <title>Kim's storytime</title>
     <style>
       body {
         margin: 0;
@@ -41,40 +41,11 @@
     </style>
   </head>
   <body>
-    <div id="countdown"></div>
-    <script>
-      function pluralize(value, singular, plural) {
-        return value === 1 ? singular : plural;
-      }
-      
-      const countdown = () => {
-        const targetDate = new Date('2025-07-04T12:00:00');
-        const now = new Date();
-        const diff = targetDate - now;
-      
-        const countdownEl = document.getElementById('countdown');
-      
-        if (diff <= 0) {
-          countdownEl.innerHTML = "I love you!";
-          clearInterval(timer);
-          return;
-        }
-      
-        const seconds = Math.floor((diff / 1000) % 60);
-        const minutes = Math.floor((diff / 1000 / 60) % 60);
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      
-        countdownEl.innerHTML = `
-          ${days} ${pluralize(days, 'Day', 'Days')}
-          ${hours.toString().padStart(2, '0')} ${pluralize(hours, 'Hour', 'Hours')}
-          ${minutes.toString().padStart(2, '0')} ${pluralize(minutes, 'Minute', 'Minutes')}
-          ${seconds.toString().padStart(2, '0')} ${pluralize(seconds, 'Second', 'Seconds')}
-        `;
-      };
-      
-      const timer = setInterval(countdown, 1000);
-      countdown();
-    </script>
+    <div id="countdown">
+      <audio controls>
+  <source src="tess.m4a" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+    </div>
   </body>
 </html>
