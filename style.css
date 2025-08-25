@@ -16,6 +16,19 @@ body {
   justify-content: center;
   align-items: center;
 }
+.container {
+  display: flex;
+  flex-direction: column;  /* stack divs vertically */
+  gap: 1rem;               /* spacing between child divs */
+  padding: 1rem;           /* spacing inside container */
+  box-sizing: border-box;  /* include padding in width/height */
+}
+
+.container > div {
+  background: #f0f0f0;     /* just to see them clearly */
+  padding: 1rem;
+  border-radius: 8px;
+}
 
 /* Centered container for audio + message */
 #audio-container {
