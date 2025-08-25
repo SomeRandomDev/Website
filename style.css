@@ -9,7 +9,7 @@
 body {
   height: 100vh;
   width: 100vw;
-  background-color: #121212; /* deep dark gray */
+  background-color: #f84d4d; /* deep dark gray */
   color: #f0f0f0; /* light text for contrast */
   font-family: 'Arial', sans-serif;
   display: flex;
