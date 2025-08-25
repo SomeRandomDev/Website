@@ -19,7 +19,7 @@ body {
 .container {
   display: flex;
   flex-direction: column;  /* stack divs vertically */
-  gap: 1rem;               /* spacing between child divs */
+  gap: 10rem;               /* spacing between child divs */
   padding: 1rem;           /* spacing inside container */
   box-sizing: border-box;  /* include padding in width/height */
 }
