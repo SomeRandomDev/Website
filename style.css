@@ -9,6 +9,7 @@ body{
   height: 100vh;
   border: 1px solid black;
   overflow: auto;
+  gap: 10px;
   justify-content: center;
   flex-direction: column;
 }
@@ -16,6 +17,6 @@ body{
 #audio-container {
   height: 200px;
   width: 100%;
-  background-color: #0071FF;
+  background-color: #171d21;
   font-size: 10pt;
 }
