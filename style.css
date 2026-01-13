@@ -33,6 +33,7 @@ body {
 /* Centered container for audio + message */
 #audio-container {
   text-align: center;
+  margin: 10%;
   padding: 1rem;
   width: 50%;
   height: 50%;
