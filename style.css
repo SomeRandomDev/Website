@@ -1,8 +1,8 @@
-body {
+#ma {
   display: flex;
 }
 
-#ma {
+#audio-container {
   height: 200px;
   width: 200px;
   background-color: #0071FF;
