@@ -1,0 +1,63 @@
+/* Reset basic styles */
+* {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set full screen dark background */
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: #171d21; /* deep dark gray */
+  color: #f0f0f0; /* light text for contrast */
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;  /* stack divs vertically */
+  gap: 10rem;               /* spacing between child divs */
+  padding: 1rem;           /* spacing inside container */
+  box-sizing: border-box;  /* include padding in width/height */
+}
+
+.container > div {
+  background: #f0f0f0;     /* just to see them clearly */
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* Centered container for audio + message */
+#audio-container {
+  text-align: center;
+  margin: 10px;
+  padding: 1rem;
+  width: 50%;
+  height: 50%;
+  display:flex;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Style the audio player */
+#audio-container audio {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 1rem;
+  filter: brightness(0.9);
+}
+
+/* Optional: message above or below the player */
+#audio-container h1 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #cccccc;
+}
+audio {
+  margin-bottom: 1rem;
+}
