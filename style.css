@@ -1,5 +1,6 @@
 #ma {
   display: flex;
+  justify-content: center;
 }
 
 #audio-container {
