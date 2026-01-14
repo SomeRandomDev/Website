@@ -20,7 +20,7 @@ body{
   padding: 1rem;
   width: 50%;
   height: 50%;
-  display:flex;
+  display: inline-flex;
   background-color: #1e1e1e;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
