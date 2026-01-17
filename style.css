@@ -3,7 +3,7 @@ body{
 }
 
 
-#ma {
+#maindi {
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -29,5 +29,5 @@ body{
 }
 
 audio {
-  overflow: hidden;
+  overflow: auto;
 }
