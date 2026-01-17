@@ -29,5 +29,5 @@ body{
 }
 
 audio {
-  overflow: auto;
+  overflow: hidden;
 }
