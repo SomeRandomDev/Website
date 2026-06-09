@@ -1,128 +1,307 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Kim's storytime <3</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div class="card-container">
-      <div class="card">
-        <h3>“Meditation"</h3>
-        <audio controls>
-          <source src="AUDIO/Mindfullness.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“The story of the tired moon"</h3>
-        <audio controls>
-          <source src="AUDIO/TheStoryofthetiredmoon.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“When Sunny went away"</h3>
-        <audio controls>
-          <source src="AUDIO/WhenSunnyWentAway.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“Daddy's never gonna hurt you again"</h3>
-        <audio controls>
-          <source src="AUDIO/NeverGonnaHurtYouAgain.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“My girlfriend talks in her sleep"</h3>
-        <audio controls>
-          <source src="AUDIO/MyGirlfriendTalksinHerSleep.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“If They Call Your Name, Never Answer"</h3>
-        <audio controls>
-          <source src="AUDIO/neveranswer.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“I Found a Hidden Door in My Basement. I Wish I Had Never Opened It."</h3>
-        <audio controls>
-          <source src="AUDIO/hiddenbasementdoor.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“My online film student kept filming the same dead oak tree"</h3>
-        <audio controls>
-          <source src="AUDIO/deadoaktree.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>“he has no face.”</h3>
-        <audio controls>
-          <source src="AUDIO/hehasnoface.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>My boyfriend is obsessed with me when I get sick. I just discovered why.</h3>
-        <audio controls>
-          <source src="AUDIO/sneeze.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>Emergency alert Part1</h3>
-        <audio controls>
-          <source src="AUDIO/emergencyalert.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>Search and Rescue Officer for the US Forest Service</h3>
-        <audio controls>
-          <source src="AUDIO/SAROfficer.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>Something went wrong with my heart transplant</h3>
-        <audio controls>
-          <source src="AUDIO/hearttransplant.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card">
-        <h3>The rainbowfish + Oh no, the Leaves are Gone</h3>
-        <audio controls>
-          <source src="AUDIO/fallleave.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="card"> 
-        <h3>I miss you so much</h3>
-        <h3>The bird girl</h3>
-        <audio controls>
-          <source src="AUDIO/junglebird.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-        <h2>Didn't see you in school today that's why I believe tomorrow is school</h2>
-      </div>
-      <div class="card"> 
-        <h3>I love you so so much cutie I hope you slept well and that you don't feel too sick</h3>
-        <h3>When Sunny went away</h3>
-        <audio controls>
-          <source src="AUDIO/WhenSunnyWentAway.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-        <h2>See you tomorrow gorgeous I love you</h2>
-      </div>
-      <div class="card"> 
-        <h3>I hope tomorrow you will wake up healthy, you're the best person to ever exist for me</h3>
-        <h3>Richard the Meerkat and the Little Gecko</h3>
-        <audio controls>
-          <source src="AUDIO/Richardthemeerkatandthelittlegecko.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-        <h2>I hope you'll enjoy this one as much as I love</h2>
-      </div>
-      <div class="card"> 
-        <h3>I love you we can do it Kim</h3>
-        <h3>Princess Jessie and the Unicorn</h3>
-        <audio controls>
-          <source src="AUDIO/PrincessJessieandtheUnicorn.mp3" type="audio/mpeg">Your browser does not support the audio element.
-        </audio>
-        <h2>I'm so glad I have your smell on that t-shirt</h2>
-      </div>
-    </div>
-  </body>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stories for you</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f7f4;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+    }
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 500;
+      color: #1a1a1a;
+    }
+    .page-header p {
+      font-size: 13px;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    .story-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 1rem 3rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .story-card {
+      background: #ffffff;
+      border: 0.5px solid rgba(0,0,0,0.1);
+      border-radius: 14px;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.45s ease, transform 0.45s ease, border-color 0.2s;
+    }
+    .story-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .card-num-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #e8f0fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-num-badge span {
+      font-size: 12px;
+      font-weight: 500;
+      color: #2563eb;
+    }
+    .card-info { flex: 1; min-width: 0; }
+    .card-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #1a1a1a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-dur {
+      font-size: 12px;
+      color: #888;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .audio-wrap { display: flex; flex-direction: column; gap: 8px; }
+
+    .prog-track {
+      width: 100%;
+      height: 3px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 99px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .prog-fill {
+      height: 100%;
+      width: 0%;
+      background: #2563eb;
+      border-radius: 99px;
+      transition: width 0.15s linear;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .play-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(0,0,0,0.15);
+      background: #f4f4f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .play-btn:active { transform: scale(0.93); }
+    .play-btn i { font-size: 15px; color: #1a1a1a; }
+
+    .time-txt {
+      font-size: 11px;
+      color: #888;
+      font-variant-numeric: tabular-nums;
+      flex: 1;
+    }
+
+    .heart-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      opacity: 0.35;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .heart-btn.liked { opacity: 1; }
+    .heart-btn:active { transform: scale(1.25); }
+    .heart-btn i { font-size: 18px; color: #D4537E; }
+
+    /* Real audio element — hidden, one per card */
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Stories for you ♡</h1>
+    <p>15 stories · tap to listen</p>
+  </div>
+
+  <div class="story-list" id="list"></div>
+
+  <script>
+    /*
+    ─────────────────────────────────────────────
+      EDIT THIS ARRAY to match your actual files.
+      Each object needs:
+        title    — displayed title
+        src      — path to your audio file
+                   (relative, e.g. "audio/story-01.mp3"
+                    or absolute URL)
+    ─────────────────────────────────────────────
+    */
+    const stories = [
+      { title: "The Night We Got Lost",           src: "audio/story-01.mp3" },
+      { title: "A Letter to the Stars",           src: "audio/story-02.mp3" },
+      { title: "The Old Lighthouse",              src: "audio/story-03.mp3" },
+      { title: "Rain on the Window",              src: "audio/story-04.mp3" },
+      { title: "Somewhere in October",            src: "audio/story-05.mp3" },
+      { title: "The Fox and the Moon",            src: "audio/story-06.mp3" },
+      { title: "Late Afternoon Reverie",          src: "audio/story-07.mp3" },
+      { title: "The Red Coat",                    src: "audio/story-08.mp3" },
+      { title: "Maps We Never Finished",          src: "audio/story-09.mp3" },
+      { title: "A Quiet Tuesday",                 src: "audio/story-10.mp3" },
+      { title: "The Bookshop on Rue Mouffetard",  src: "audio/story-11.mp3" },
+      { title: "Winter Solstice",                 src: "audio/story-12.mp3" },
+      { title: "The Stranger's Garden",           src: "audio/story-13.mp3" },
+      { title: "Before the City Woke Up",         src: "audio/story-14.mp3" },
+      { title: "Things Left Unsaid",              src: "audio/story-15.mp3" },
+    ];
+
+    function fmt(s) {
+      s = Math.floor(s);
+      return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+    }
+
+    const list = document.getElementById('list');
+    const audioEls = [];
+    const liked = {};
+
+    stories.forEach((story, i) => {
+      const card = document.createElement('div');
+      card.className = 'story-card';
+
+      card.innerHTML = `
+        <audio id="audio-${i}" src="${story.src}" preload="metadata"></audio>
+        <div class="card-top">
+          <div class="card-num-badge"><span>${String(i + 1).padStart(2, '0')}</span></div>
+          <div class="card-info">
+            <div class="card-title">${story.title}</div>
+            <div class="card-dur">
+              <i class="ti ti-clock" aria-hidden="true" style="font-size:11px"></i>
+              <span id="dur-${i}">--:--</span>
+            </div>
+          </div>
+        </div>
+        <div class="audio-wrap">
+          <div class="prog-track" id="track-${i}">
+            <div class="prog-fill" id="fill-${i}"></div>
+          </div>
+          <div class="controls">
+            <button class="play-btn" id="btn-${i}" aria-label="Play ${story.title}">
+              <i class="ti ti-player-play" id="icon-${i}"></i>
+            </button>
+            <span class="time-txt" id="time-${i}">0:00 / --:--</span>
+            <button class="heart-btn" id="heart-${i}" aria-label="Like this story">
+              <i class="ti ti-heart" id="hearticon-${i}"></i>
+            </button>
+          </div>
+        </div>
+      `;
+
+      list.appendChild(card);
+
+      const audio = document.getElementById(`audio-${i}`);
+      audioEls.push(audio);
+
+      audio.addEventListener('loadedmetadata', () => {
+        const d = fmt(audio.duration);
+        document.getElementById(`dur-${i}`).textContent = d;
+        document.getElementById(`time-${i}`).textContent = `0:00 / ${d}`;
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        document.getElementById(`fill-${i}`).style.width = `${Math.round(pct)}%`;
+        const d = audio.duration ? fmt(audio.duration) : '--:--';
+        document.getElementById(`time-${i}`).textContent = `${fmt(audio.currentTime)} / ${d}`;
+      });
+
+      audio.addEventListener('ended', () => {
+        document.getElementById(`btn-${i}`).dataset.playing = '0';
+        document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
+        document.getElementById(`fill-${i}`).style.width = '0%';
+        audio.currentTime = 0;
+      });
+
+      document.getElementById(`btn-${i}`).addEventListener('click', () => {
+        const isPlaying = audio.paused === false;
+        if (isPlaying) {
+          audio.pause();
+          document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
+        } else {
+          audioEls.forEach((a, j) => {
+            if (j !== i && !a.paused) {
+              a.pause();
+              document.getElementById(`icon-${j}`).className = 'ti ti-player-play';
+            }
+          });
+          audio.play();
+          document.getElementById(`icon-${i}`).className = 'ti ti-player-pause';
+        }
+      });
+
+      document.getElementById(`track-${i}`).addEventListener('click', (e) => {
+        if (!audio.duration) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        const ratio = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = ratio * audio.duration;
+      });
+
+      document.getElementById(`heart-${i}`).addEventListener('click', function () {
+        liked[i] = !liked[i];
+        this.classList.toggle('liked', liked[i]);
+        document.getElementById(`hearticon-${i}`).className = liked[i]
+          ? 'ti ti-heart-filled'
+          : 'ti ti-heart';
+      });
+    });
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.story-card').forEach((c, i) => {
+      c.style.transitionDelay = `${i * 0.04}s`;
+      io.observe(c);
+    });
+  </script>
+
+</body>
 </html>
