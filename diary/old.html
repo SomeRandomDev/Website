@@ -41,6 +41,7 @@
       padding: 6px 16px;
     }
     .nav-item i { font-size: 22px; }
+    /* Diary page accent: rose */
     .nav-item.active { color: #D4537E; }
 
     /* ── Page header ── */
@@ -55,71 +56,39 @@
     .entry-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       padding: 0 1rem 1.5rem;
       max-width: 520px;
       margin: 0 auto;
     }
 
-    /* ── Card (accordion) ── */
+    /* ── Diary card (text entry, no audio) ── */
     .diary-card {
       background: #ffffff;
       border: 0.5px solid rgba(0,0,0,0.1);
       border-radius: 14px;
-      overflow: hidden;
+      padding: 1.1rem 1rem;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.45s ease, transform 0.45s ease;
     }
     .diary-card.visible { opacity: 1; transform: translateY(0); }
 
-    /* always-visible row */
-    .card-row {
+    .diary-card-top {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0.85rem 0.9rem;
-      cursor: pointer;
-      user-select: none;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
     }
     .diary-badge {
-      width: 36px; height: 36px; border-radius: 10px;
+      width: 38px; height: 38px; border-radius: 10px;
       background: #fce7ef;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .diary-badge i { font-size: 16px; color: #D4537E; }
-    .card-meta { flex: 1; min-width: 0; }
-    .diary-title {
-      font-size: 14px; font-weight: 500; color: #1a1a1a;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .diary-date { font-size: 11px; color: #aaa; margin-top: 2px; }
-
-    .heart-btn {
-      background: none; border: none; cursor: pointer; padding: 4px;
-      display: flex; align-items: center; flex-shrink: 0;
-      opacity: 0.3; transition: opacity 0.15s, transform 0.15s;
-    }
-    .heart-btn.liked { opacity: 1; }
-    .heart-btn:active { transform: scale(1.3); }
-    .heart-btn i { font-size: 18px; color: #D4537E; }
-
-    .chevron {
-      flex-shrink: 0; display: flex; align-items: center;
-      color: #bbb; transition: transform 0.25s ease;
-    }
-    .chevron i { font-size: 15px; }
-
-    /* collapsible body — height set dynamically by JS */
-    .card-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease;
-    }
-    .body-inner {
-      padding: 0 0.9rem 0.9rem;
-      display: flex; flex-direction: column; gap: 8px;
-    }
+    .diary-badge i { font-size: 18px; color: #D4537E; }
+    .diary-meta { flex: 1; min-width: 0; }
+    .diary-title { font-size: 15px; font-weight: 500; color: #1a1a1a; }
+    .diary-date  { font-size: 12px; color: #aaa; margin-top: 3px; }
 
     .diary-body {
       font-size: 14px;
@@ -130,8 +99,8 @@
       white-space: pre-wrap;
     }
 
-    /* audio player inside body */
-    .audio-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 8px; }
+    /* ── Audio diary card (entry with voice recording) ── */
+    .audio-wrap { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
     .prog-track {
       width: 100%; height: 3px; background: rgba(0,0,0,0.08);
       border-radius: 99px; overflow: hidden; cursor: pointer;
@@ -142,7 +111,7 @@
     }
     .controls { display: flex; align-items: center; gap: 10px; }
     .play-btn {
-      width: 36px; height: 36px; border-radius: 50%;
+      width: 38px; height: 38px; border-radius: 50%;
       border: 0.5px solid rgba(0,0,0,0.15); background: #f4f4f2;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer; flex-shrink: 0; transition: background 0.15s, transform 0.1s;
@@ -150,7 +119,6 @@
     .play-btn:active { transform: scale(0.93); }
     .play-btn i { font-size: 15px; color: #1a1a1a; }
     .time-txt { font-size: 11px; color: #888; font-variant-numeric: tabular-nums; flex: 1; }
-
     audio { display: none; }
   </style>
 </head>
@@ -181,7 +149,7 @@
 
   <script>
     /* ── Highlight active nav tab ── */
-    const page = location.pathname.split('/').pop();
+    const page = location.pathname.split('/').pop() || 'diary.html';
     document.querySelectorAll('.nav-item').forEach(a => {
       if (a.getAttribute('href') === page) a.classList.add('active');
     });
@@ -222,7 +190,6 @@
 
     const list   = document.getElementById('list');
     const audios = [];
-    const liked  = JSON.parse(localStorage.getItem('diary-likes') || '{}');
 
     entries.forEach((entry, i) => {
       const card = document.createElement('div');
@@ -247,57 +214,18 @@
         : '';
 
       card.innerHTML = `
-        <div class="card-row" id="row-${i}">
-          <div class="diary-badge">
-            <i class="ti ti-${entry.src ? 'microphone' : 'pencil'}" aria-hidden="true"></i>
-          </div>
-          <div class="card-meta">
+        <div class="diary-card-top">
+          <div class="diary-badge"><i class="ti ti-${entry.src ? 'microphone' : 'pencil'}" aria-hidden="true"></i></div>
+          <div class="diary-meta">
             <div class="diary-title">${entry.title}</div>
             <div class="diary-date">${entry.date}</div>
           </div>
-          <button class="heart-btn" id="heart-${i}" aria-label="Like this entry">
-            <i class="ti ti-heart" id="hearticon-${i}"></i>
-          </button>
-          <div class="chevron" id="chev-${i}"><i class="ti ti-chevron-down"></i></div>
         </div>
-        <div class="card-body" id="body-${i}">
-          <div class="body-inner">
-            ${audioHTML}
-            ${bodyHTML}
-          </div>
-        </div>
+        ${bodyHTML}
+        ${audioHTML}
       `;
       list.appendChild(card);
 
-      /* ── Accordion toggle with dynamic height ── */
-      document.getElementById(`row-${i}`).addEventListener('click', (e) => {
-        if (e.target.closest('.heart-btn')) return;
-        const body = document.getElementById(`body-${i}`);
-        const chev = document.getElementById(`chev-${i}`);
-        const isOpen = body.classList.contains('open');
-
-        document.querySelectorAll('.card-body.open').forEach(b => {
-          b.style.maxHeight = '0';
-          b.classList.remove('open');
-        });
-        document.querySelectorAll('.chevron').forEach(c => c.style.transform = '');
-
-        if (!isOpen) {
-          body.classList.add('open');
-          body.style.maxHeight = body.scrollHeight + 'px';
-          chev.style.transform = 'rotate(180deg)';
-        }
-      });
-
-      /* ── Heart ── */
-      document.getElementById(`heart-${i}`).addEventListener('click', function () {
-        liked[i] = !liked[i];
-        this.classList.toggle('liked', liked[i]);
-        document.getElementById(`hearticon-${i}`).className = liked[i] ? 'ti ti-heart-filled' : 'ti ti-heart';
-        localStorage.setItem('diary-likes', JSON.stringify(liked));
-      });
-
-      /* ── Audio player ── */
       if (entry.src) {
         const audio = document.getElementById(`daudio-${i}`);
         audios.push({ el: audio, idx: i });
@@ -343,17 +271,6 @@
       }
     });
 
-    /* ── Restore saved likes ── */
-    Object.keys(liked).forEach(k => {
-      if (!liked[k]) return;
-      const btn = document.getElementById(`heart-${k}`);
-      if (btn) {
-        btn.classList.add('liked');
-        document.getElementById(`hearticon-${k}`).className = 'ti ti-heart-filled';
-      }
-    });
-
-    /* ── Scroll reveal ── */
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.08 });
