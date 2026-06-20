@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scary stories</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f7f4;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* ── Bottom nav ── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 64px;
+      background: #ffffff;
+      border-top: 0.5px solid rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 100;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      color: #bbb;
+      font-size: 11px;
+      transition: color 0.15s;
+      padding: 6px 16px;
+    }
+    .nav-item i { font-size: 22px; }
+    /* Scary page accent: purple */
+    .nav-item.active { color: #7c3aed; }
+
+    /* ── Page header ── */
+    .page-header {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+    }
+    .page-header h1 { font-size: 22px; font-weight: 500; color: #1a1a1a; }
+    .page-header p  { font-size: 13px; color: #888; margin-top: 6px; }
+
+    /* ── Story list ── */
+    .story-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 1rem 1.5rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .story-card {
+      background: #ffffff;
+      border: 0.5px solid rgba(0,0,0,0.1);
+      border-radius: 14px;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .story-card.visible { opacity: 1; transform: translateY(0); }
+
+    .card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .card-num-badge {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: #ede9fe;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .card-num-badge span { font-size: 12px; font-weight: 500; color: #7c3aed; }
+    .card-info { flex: 1; min-width: 0; }
+    .card-title {
+      font-size: 15px; font-weight: 500; color: #1a1a1a;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .card-dur { font-size: 12px; color: #888; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+
+    .audio-wrap { display: flex; flex-direction: column; gap: 8px; }
+    .prog-track {
+      width: 100%; height: 3px; background: rgba(0,0,0,0.08);
+      border-radius: 99px; overflow: hidden; cursor: pointer;
+    }
+    .prog-fill {
+      height: 100%; width: 0%;
+      background: #7c3aed; border-radius: 99px; transition: width 0.15s linear;
+    }
+    .controls { display: flex; align-items: center; gap: 10px; }
+    .play-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 0.5px solid rgba(0,0,0,0.15); background: #f4f4f2;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; transition: background 0.15s, transform 0.1s;
+    }
+    .play-btn:active { transform: scale(0.93); }
+    .play-btn i { font-size: 15px; color: #1a1a1a; }
+    .time-txt { font-size: 11px; color: #888; font-variant-numeric: tabular-nums; flex: 1; }
+    .heart-btn {
+      background: none; border: none; cursor: pointer; padding: 0;
+      display: flex; align-items: center; opacity: 0.35;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .heart-btn.liked { opacity: 1; }
+    .heart-btn:active { transform: scale(1.25); }
+    .heart-btn i { font-size: 18px; color: #7c3aed; }
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Scary stories 🌙</h1>
+    <p>Don't listen alone in the dark</p>
+  </div>
+
+  <div class="story-list" id="list"></div>
+
+  <!-- ── Bottom navigation ── -->
+  <nav class="bottom-nav">
+    <a href="stories.html" class="nav-item">
+      <i class="ti ti-book" aria-hidden="true"></i>
+      <span>Stories</span>
+    </a>
+    <a href="scary.html" class="nav-item">
+      <i class="ti ti-moon-stars" aria-hidden="true"></i>
+      <span>Scary</span>
+    </a>
+    <a href="diary.html" class="nav-item">
+      <i class="ti ti-notebook" aria-hidden="true"></i>
+      <span>Diary</span>
+    </a>
+  </nav>
+
+  <script>
+    /* ── Highlight active nav tab ── */
+    const page = location.pathname.split('/').pop() || 'scary.html';
+    document.querySelectorAll('.nav-item').forEach(a => {
+      if (a.getAttribute('href') === page) a.classList.add('active');
+    });
+
+    /* ── EDIT YOUR SCARY STORIES HERE ── */
+    const stories = [
+      { title: "Scary Story Title 01", src: "audio/scary-01.mp3" },
+      { title: "Scary Story Title 02", src: "audio/scary-02.mp3" },
+      { title: "Scary Story Title 03", src: "audio/scary-03.mp3" },
+      /* add more entries as needed */
+    ];
+
+    function fmt(s) {
+      s = Math.floor(s);
+      return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+    }
+
+    const list = document.getElementById('list');
+    const audioEls = [];
+    const liked = JSON.parse(localStorage.getItem('scary-likes') || '{}');
+
+    stories.forEach((story, i) => {
+      const card = document.createElement('div');
+      card.className = 'story-card';
+      card.innerHTML = `
+        <audio id="audio-${i}" src="${story.src}" preload="metadata"></audio>
+        <div class="card-top">
+          <div class="card-num-badge"><span>${String(i + 1).padStart(2, '0')}</span></div>
+          <div class="card-info">
+            <div class="card-title">${story.title}</div>
+            <div class="card-dur">
+              <i class="ti ti-clock" aria-hidden="true" style="font-size:11px"></i>
+              <span id="dur-${i}">--:--</span>
+            </div>
+          </div>
+        </div>
+        <div class="audio-wrap">
+          <div class="prog-track" id="track-${i}">
+            <div class="prog-fill" id="fill-${i}"></div>
+          </div>
+          <div class="controls">
+            <button class="play-btn" id="btn-${i}" aria-label="Play ${story.title}">
+              <i class="ti ti-player-play" id="icon-${i}"></i>
+            </button>
+            <span class="time-txt" id="time-${i}">0:00 / --:--</span>
+            <button class="heart-btn" id="heart-${i}" aria-label="Like this story">
+              <i class="ti ti-heart" id="hearticon-${i}"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      list.appendChild(card);
+
+      const audio = document.getElementById(`audio-${i}`);
+      audioEls.push(audio);
+
+      audio.addEventListener('loadedmetadata', () => {
+        const d = fmt(audio.duration);
+        document.getElementById(`dur-${i}`).textContent = d;
+        document.getElementById(`time-${i}`).textContent = `0:00 / ${d}`;
+      });
+      audio.addEventListener('timeupdate', () => {
+        const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        document.getElementById(`fill-${i}`).style.width = `${Math.round(pct)}%`;
+        const d = audio.duration ? fmt(audio.duration) : '--:--';
+        document.getElementById(`time-${i}`).textContent = `${fmt(audio.currentTime)} / ${d}`;
+      });
+      audio.addEventListener('ended', () => {
+        document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
+        document.getElementById(`fill-${i}`).style.width = '0%';
+        audio.currentTime = 0;
+      });
+
+      document.getElementById(`btn-${i}`).addEventListener('click', () => {
+        const isPlaying = !audio.paused;
+        if (isPlaying) {
+          audio.pause();
+          document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
+        } else {
+          audioEls.forEach((a, j) => {
+            if (j !== i && !a.paused) {
+              a.pause();
+              document.getElementById(`icon-${j}`).className = 'ti ti-player-play';
+            }
+          });
+          audio.play();
+          document.getElementById(`icon-${i}`).className = 'ti ti-player-pause';
+        }
+      });
+
+      document.getElementById(`track-${i}`).addEventListener('click', (e) => {
+        if (!audio.duration) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+      });
+
+      document.getElementById(`heart-${i}`).addEventListener('click', function () {
+        liked[i] = !liked[i];
+        this.classList.toggle('liked', liked[i]);
+        document.getElementById(`hearticon-${i}`).className = liked[i] ? 'ti ti-heart-filled' : 'ti ti-heart';
+        localStorage.setItem('scary-likes', JSON.stringify(liked));
+      });
+    });
+
+    Object.keys(liked).forEach(k => {
+      if (!liked[k]) return;
+      const btn = document.getElementById(`heart-${k}`);
+      if (btn) {
+        btn.classList.add('liked');
+        document.getElementById(`hearticon-${k}`).className = 'ti ti-heart-filled';
+      }
+    });
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.story-card').forEach((c, i) => {
+      c.style.transitionDelay = `${i * 0.04}s`;
+      io.observe(c);
+    });
+  </script>
+
+</body>
+</html>
