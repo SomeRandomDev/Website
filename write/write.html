@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New entry</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f7f4;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .page-header h1 { font-size: 20px; font-weight: 500; }
+    .page-header p  { font-size: 13px; color: #888; margin-top: 5px; }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: #ffffff;
+      border: 0.5px solid rgba(0,0,0,0.15);
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      font-family: inherit;
+      font-size: 15px;
+      color: #1a1a1a;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input:focus, textarea:focus { border-color: #D4537E; }
+
+    textarea {
+      min-height: 220px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .btn {
+      background: #D4537E;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn:active { opacity: 0.85; transform: scale(0.98); }
+
+    /* output block */
+    .output-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .output-wrap.visible { display: flex; }
+
+    .output-label {
+      font-size: 13px;
+      color: #888;
+    }
+    .output-label strong { color: #1a1a1a; }
+
+    .output-box {
+      background: #ffffff;
+      border: 0.5px solid rgba(0,0,0,0.12);
+      border-radius: 10px;
+      padding: 0.9rem;
+      font-family: 'Menlo', 'Courier New', monospace;
+      font-size: 13px;
+      color: #1a1a1a;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: #f4f4f2;
+      border: 0.5px solid rgba(0,0,0,0.12);
+      border-radius: 10px;
+      padding: 0.75rem;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      color: #1a1a1a;
+    }
+    .copy-btn:active { transform: scale(0.98); }
+    .copy-btn.copied { color: #D4537E; border-color: #D4537E; }
+
+    .divider {
+      height: 0.5px;
+      background: rgba(0,0,0,0.08);
+      margin: 0.5rem 0;
+    }
+
+    .reset-btn {
+      background: none;
+      border: none;
+      font-size: 13px;
+      color: #aaa;
+      cursor: pointer;
+      text-align: center;
+      padding: 0.5rem;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>New diary entry</h1>
+    <p>Write freely — the formatting is handled for you</p>
+  </div>
+
+  <!-- ── Input form ── -->
+  <div class="form" id="form">
+    <div>
+      <label for="title">Title</label>
+      <input type="text" id="title" placeholder="Give this entry a name…" />
+    </div>
+    <div>
+      <label for="date">Date</label>
+      <input type="text" id="date" placeholder="e.g. June 21, 2026" />
+    </div>
+    <div>
+      <label for="body">Entry</label>
+      <textarea id="body" placeholder="Write whatever you want. Press Enter normally for new lines…"></textarea>
+    </div>
+    <button class="btn" onclick="generate()">Generate JSON block ↓</button>
+  </div>
+
+  <div class="divider" style="max-width:520px;margin:1.5rem auto"></div>
+
+  <!-- ── Output ── -->
+  <div class="output-wrap" id="output">
+    <p class="output-label">Copy this block and paste it into your <strong>entries.json</strong> file:</p>
+    <div class="output-box" id="result"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy to clipboard</button>
+    <button class="reset-btn" onclick="reset()">Write another entry</button>
+  </div>
+
+  <script>
+    /* Pre-fill today's date */
+    const today = new Date();
+    const formatted = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('date').value = formatted;
+
+    function generate() {
+      const title = document.getElementById('title').value.trim();
+      const date  = document.getElementById('date').value.trim();
+      const body  = document.getElementById('body').value;
+
+      if (!title) { alert('Please add a title.'); return; }
+      if (!body.trim()) { alert('The entry is empty.'); return; }
+
+      /* Escape special JSON characters */
+      const escaped = body
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '');
+
+      const block = `{
+  "title": "${title.replace(/"/g, '\\"')}",
+  "date": "${date.replace(/"/g, '\\"')}",
+  "body": "${escaped}"
+}`;
+
+      document.getElementById('result').textContent = block;
+      document.getElementById('output').classList.add('visible');
+      document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function copyResult() {
+      const text = document.getElementById('result').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy to clipboard';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function reset() {
+      document.getElementById('title').value = '';
+      document.getElementById('body').value = '';
+      document.getElementById('date').value = formatted;
+      document.getElementById('result').textContent = '';
+      document.getElementById('output').classList.remove('visible');
+      document.getElementById('copyBtn').textContent = 'Copy to clipboard';
+      document.getElementById('copyBtn').classList.remove('copied');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
