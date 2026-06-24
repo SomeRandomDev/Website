@@ -17,7 +17,6 @@
       padding-bottom: 80px;
     }
 
-    /* ── Bottom nav ── */
     .bottom-nav {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -44,7 +43,6 @@
     .nav-item i { font-size: 22px; }
     .nav-item.active { color: #D4537E; }
 
-    /* ── Page header ── */
     .page-header {
       text-align: center;
       padding: 2.5rem 1rem 1.5rem;
@@ -52,7 +50,6 @@
     .page-header h1 { font-size: 22px; font-weight: 500; color: #1a1a1a; }
     .page-header p  { font-size: 13px; color: #888; margin-top: 6px; }
 
-    /* ── Entry list ── */
     .entry-list {
       display: flex;
       flex-direction: column;
@@ -62,7 +59,6 @@
       margin: 0 auto;
     }
 
-    /* ── Card (accordion) ── */
     .diary-card {
       background: #ffffff;
       border: 0.5px solid rgba(0,0,0,0.1);
@@ -74,7 +70,6 @@
     }
     .diary-card.visible { opacity: 1; transform: translateY(0); }
 
-    /* always-visible row */
     .card-row {
       display: flex;
       align-items: center;
@@ -111,7 +106,6 @@
     }
     .chevron i { font-size: 15px; }
 
-    /* collapsible body — height set dynamically by JS */
     .card-body {
       max-height: 0;
       overflow: hidden;
@@ -131,7 +125,6 @@
       white-space: pre-wrap;
     }
 
-    /* audio player inside body */
     .audio-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 8px; }
     .prog-track {
       width: 100%; height: 3px; background: rgba(0,0,0,0.08);
@@ -164,7 +157,6 @@
 
   <div class="entry-list" id="list"></div>
 
-  <!-- ── Bottom navigation ── -->
   <nav class="bottom-nav">
     <a href="/" class="nav-item">
       <i class="ti ti-book" aria-hidden="true"></i>
@@ -187,38 +179,6 @@
       if (a.getAttribute('href') === page) a.classList.add('active');
     });
 
-    /*
-    ─────────────────────────────────────────────────────────
-      EDIT YOUR DIARY ENTRIES HERE.
-      Each entry can be:
-        - text only  →  { title, date, body }
-        - audio only →  { title, date, src }
-        - both       →  { title, date, body, src }
-    ─────────────────────────────────────────────────────────
-    */
-    const entries = [
-      {
-        title: "Man the temperatures these days",
-        date: "Dienstag, 23. Juni 2026",
-        body: "Today I caught myself thinking about how I never really managed to follow up on writing a personal diary. \n\nBut for once I’m writing every single day on it and I think the only reason is simply that this one is directed at you Kim. \n\nIt feels like you’re still in my life because I get to vent at you as if you’re going to listen and encourage me to keep going \n\nToday was one of those days where I really needed you, a smile, a heart by text, a call. A simple I love you from you would get me right back in. Right now I need you so much.\n\nI think I’m the one that needs to be held and told that everything will be okay.\n\nAt the end of our relationship you told me you’d like if I could hold you and tell you that everything will be okay. And a few days later we had our “it’s over” talk where I said so many times that it’s going to be okay. \n\nSo many times in fact that I hate saying it now because it only brings back the feeling of that day. The feeling of a tight chest unable to breathe fully. \n\nI lied to you, everything is not going to be okay. I barely exist at this point anymore. I don’t want to see my friends anymore I have so many doubts about the future and I have no one to love. \n\nI really need you in my life, you were like a purpose to me, I had a reason to do stuff. A reason to become someone. A person to protect from this world. \n\nAnd now what do I have ?\n\nNothing \n\nI have nothing, no one, and I don’t even want to change that. I don’t want another woman to come and replace you. \n\nFor so many reasons I don’t want that\n\nI truly want nothing but the best for you, how do I make sure that this new guy has your interests at heart ?\n\nHow do I make sure that you’re feeling guided, feeling heard, feeling supported when I can’t even talk to you anymore because you want to move on?\n\nI am so useless,I had the prettiest most pure soul to ever lay eyes on me actually be interested in me. And I fucked it up, first because I was horny and then because I could barely function due to my depression in Berlin. \n\nI fucked up one of the most beautiful relationships this cruel world could conjure. \n\nOur relationship was beautiful, when we were both on the same vibe it felt like nothing could stop us. You were so funny, so curious, so mature, so intelligent such a pleasure to be with that you made me drive to you so many times only for a chance to see you for only 2 days at a time. \n\nNow that you’re not in my life I have lost all meaning in mine. \n\nYou telling me that you didn’t completely move on and that I’m not out of your mind fully just crushed me. \n\nSimply because I could only see that soon it’ll be the case just because I can only see the glass mostly empty and not slightly filled. \n\nI see that you listened to lovers on the sun recently, and each time I’m wondering. \n\nDoes she think about me when hearing lyrics like this…\n\nOr does she think about another man. \n\nI am so jealous, so envious that you decided to talk to him. I wish I could still be the one you’d turn to when in need of help. \n\nI think I know why I have this picture in my head for so long now. \n\nThe one in which I offer you flowers while my whole arm is on fire and you’re not really on the picture. \n\nI think it’s because deep down my mind is telling me that’s what it needs. \n\nThat’s what it wants. \n\nIt wants you and for that it’s ready to set itself on fire. \n\nJust for you to feel warmth\n\nJust for you to feel loved\n\nMy love for you is so strong I’d put aside everything even myself just for you to feel appreciated\n\nAnd this has never changed, even if my way of loving could be cold sometimes my love for you never wavered. And yet I treated you the way I did. \n\nAm I simply stupid ?\n\nIn the text with 50 things you love about me you never mentioned my intelligence but rather my knowledge. Did you think I was not intelligent ?\n\nWas I too stupid to recognise who I had with me?\n\nWe were so perfect for each other when we were together. You made me feel so loved so appreciated, I felt like I could do anything. \n\nAnd I know I’ve said that before but I don’t want to free myself from what could have been. \n\nI want you. \n\nI want nothing but my Mausi. \n\nI want nothing except seeing you smile and enjoying what this world has to offer. \n\nAnd if I have to suffer before I get you then suffering will be the only thing I’ll ever want before the end of me. \n\nIsn’t this life beautiful Kim ?\n\nIsn’t the world in general simply beautiful ?\n\nWe have creatures capable of putting themselves in danger just to protect the ones they love\n\nI think this is one of the most fascinating things our existences have to offer. \n\nAny creature would be expected to put their survival, their own comfort above anything else. \n\nWe even have humans putting their own comfort above other’s survival. \n\nAnd we also have people putting others above their own survival, and all this can only originate from love. \n\nDying for your loved ones, dying for what you believe in. \n\nThinking that there are things above one’s self is, to me, the most impressive thing one can do. \n\nWhile I was writing this I was all over the place, at one point crying at one point hopeful about experiencing what life has to offer together. \n\nI am wondering why am I writing this. \n\nAre you reading it and I am only scaring you ?\n\nAre you never going to see that the website has changed and now contains all the things I wish I could tell you ?\n\nAm I going to move on in 2 months and fall in love with a woman and forget about you? I don’t even know why I talked to you about moving on to another woman as if I had anyone lined up or as if I even wanted to move on to someone else. \n\nIs someone going to stumble onto this website before you ever read these ?\n\nWill I delete every entry before you do ?\n\nHow long would that website hold on if I were to go tonight ?\n\nIt costs 13€ to run the website per year so I could put all the money I have right now into feeding this website for as long as possible. \n\nAnd it would last 316 years, now putting aside all problems like that company probably not existing way before that, I think it’s so interesting how that website could be the only trace of us ever having been a thing. \n\nWhat will the world be like in 316 years ? \n\nI would love to have a conversation with you \n\nDo you remember all those feel good reels we’d send each other about souls and being soulmates? \n\nNowadays I can’t stop thinking of us two in those simplified versions of us just like “souls” trying to reach each other but being confused about not getting to the other one. \n\nLike two cats that lived in different neighbourhoods but one day one of the two was just not there for the meet-up for some reason. I feel like both our souls are currently those cats. Wanting to hold each other and unable to understand why there’s nothing to hold anymore. \n\nJust emptiness. \n\nYou say you didn’t fully move on but I’m sure I’m not the only one that thought about that. \n\nDo you still have those thoughts?\n\nIt was meant to be you is something you told me recently by text \n\n\n\nNo\n\n\n\nIt IS still meant to be you. \n\nOur story is not finished \n\nI will keep going and make sure I become the version of myself that will one day be able to take your call with confidence \n\n\n\nNow I know what you’d feel if you were to read this. \n\nPlease don’t get it wrong I know how I sound. \n\nBut I also know what I want \n\nAnd it’s your eyes \n\n\n\nI know you’re scared of it not being like before \n\nI’m not scared \n\nBecause I know it will not be like before \n\nBecause there’s a path that exists \n\nA path that makes us even stronger than before\n\nNow I’m wondering what it is you’re currently doing, are you studying maybe ?\n\nGetting excited about something ?\n\nGetting angry at a math problem?\n\nVibing to some music ?\n\nWatching goofy stuff with your friends on TikTok ?\n\nTalking to that guy ?\n\nAre you still having trouble falling asleep ? Especially in such heat.\n\nAre you making a conscious choice not to open the website ?\n\nDid you open it and saw the diary page and decided not to read it ?\n\nWas it too long for you and you decided not to read it ?\n\nDid you read it and you decided to talk to me in a way that I would think you didn’t read it ?\n\nDid you read it and decided to stop because it hurt too much ?\n\nAre you reading it wondering why I’m not uploading any new stories ?\n\nAre you reading it and thinking about us. \n\nAre you reading it and feeling like you shouldn’t talk to me even though you also want to so you can move on?\n\nI made the website so much better for you and never got any word on how you like it and it makes me feel so shit."
-      },
-      {
-        title: "Herzlichen Glückwunsch zum Führerschein!!!",
-        date: "Montag, 22. Juni 2026",
-        body: "What a day Kim, on my side I spent a simply great day!\n\nI’m sure you’ve had one of those days, you look at yourself in the mirror you look great, you talk with anyone you have nice interactions.. it’s like the universe is winking at you. \n\nI simply felt great from the moment I drove to work all the way now while I’m watching France vs Iraq  \n\nI love those days it feels like you’re a movie star entering the set and everyone wants to talk to you \n\nAnd all of this simply because I decided today I was going to have a good day. It’s impressive how self-persuasion can be so effective.\n\nThese days truly make me feel like I’m seeing how I used to commence my days in the past. \n\nAnd all of that before you decided to tell me you had earned your driving licence \n\nWoooooo!! I’m really so damn happy for you I wish I could be with you to shower you with praises to reminisce on that first time I made you drive a manual in Dortmund and how far you’ve come and how proud you should be of yourself. Man it’s a great feeling seeing you accomplish stuff it feels like I’m more happy about your licence than I was with mine. \n\nThough I must admit there’s a tiny bit of a bad note on that, it’s just the way you wrote that message it feels like you think I’m already past us. Like I was not going to care about that\n\nIf only you checked the website you’d know how deeply I care about you and how I’d never dismiss you for anything let alone such a huge accomplishment. \n\nAll in all a damn good day \n\nI wish I had heard your voice explaining everything to me. How confident you were what made you doubt how you felt. \n\nI wish to hear everything, especially with the way you like to tell your stories I simply miss it \n\nI know for a fact that your play starts on the 25th I would pay good money to come and see you and encourage you just before the play. It would be such a pleasure. \n\nI just miss you so much and the more I think about us throughout this diary the more I realise it’s not being in a couple that I miss \n\nIt’s simply you, you had a great personality, the goofiness was what made me fall in love I think or perhaps it’s those wonderful eyes. \n\nNow that I write wonderful I feel like for your eyes I should write wonder-full eyes, as to me they’re indeed full of wonders \n\nI’m really enjoying this concept of a shared diary it’s making me step back on a daily basis and sometimes even throughout the day\n\nI keep my eyes set on the goal going back to being the man you loved so that I can improve first \n\nFor me \n\nFor us \n\nAnd of course for you\n\nAnd so that if one day your mind tells you give him a chance I can respond confidently let’s go I’ve been preparing for this \n\nI can’t wait until my life is good for me to put on a smile \n\nI have to find a reason to smile so that my life can be good. \n\nIt’s already 0:00 I’ll keep watching the game a bit but then it’s offf to bed for me \n\nMwaaaaa see you soon hopefully "
-      },
-      {
-        title: "Day 2 of trying to put my thoughts out there",
-        date: "Sonntag, 21. Juni 2026",
-        body: "Today was yet another boring day at home I worked on the car yesterday and bought some clothes but I figured yesterday’s entry must look way too long so no need to talk about that. \n\nThose things being don’t meant I decided to not do anything today. \n\nWell nothing except play some geometry dash, and stare at videos of you. \n\nTalking about GD man the game is starting to feel better, I get why you’re so into it today I finished dry out.  Didn’t even feel that difficult but to you it must be obvious that it isn’t difficult. \n\nI also downloaded a mod for GD called geode that gives you a place to install other mods. The one I installed is called practice checkpoint permanence. It lets you put checkpoints that you can come back to very easily so you can divide the level into the sections that bother you. \n\nI recommend you so so so much to try it Kim. You being so much better at the game already means it would make you so much better than me. \n\nI remember when you casually did like 8 levels from Robtop in front of me like it was no big deal, mn the more I play this game the more I’m impressed with you. \n\nAnd the more I want to watch you play Gd and get you that thing you wanted the little keyboard. \n\nIt makes me so sad to see you don’t even play games anymore. \n\nIs it because school is too much currently ?\n\nIs it because video games remind you of me ?\n\nIs it because you simply don’t feel like playing anymore?\n\nComing back to me staring at your videos, I think I was staring at my screen for a solid 5 minutes on one of your TikToks. \n\nThe one with “sleepy” written on it, if by some miracle you’re reading this please go and check it yourself again \n\nMesmerising would be the term to describe it honestly. \n\nThe way you look is at the camera is so pure it’s that feeling that I am looking for and I can’t accept that now you’re not feeling like this anymore. \n\nThe way you smile, the way you get the camera closer at the end makes me want to simply grab your cheeks and start giving you those hundreds of kisses until you start protecting yourself from them and give even more on top of that. \n\nSomething else, entirely yesterday’s entry I mentioned that I wanted to change as a person. Did you know that testosterone isn’t actually the hormone of aggression? \n\nIt’s actually the opposite more test in a man will typically make him more calm and here’s something else that’s interesting body fat in men reduces the testosterone quite a lot actually. \n\nSo a few days ago I decided I was going to lose the weight and get my physique like it used to be, lean and muscular but nothing crazy. \n\nFor me\n\nFor us\n\nFor you\n\nI started on the 14th at 85kg and today I’m already at 81,6kg, can you believe that ?\n\nI feel lighter already and more at peace with my body. \n\nI also decided to actually shave my head a few days ago like shaving not just using the hair clippers but directly with the razor. \n\nIt looked great I think I wonder if you’d have enjoyed it I don’t think you ever told me which length you preferred. \n\nJust trimmed, a few days ?\n\nI would love to know \n\nI would also love for you to take care of my beard and hair once again it was so cute.\n\nHow into it you were and once you had the hang of it you were making me look even better than if I was doing it. \n\nI truly miss those little moments where I would show you something and guide you those were so pure \n\nI wonder if you watched Germany play yesterday ?\n\nToday was “fête de la musique” in France I’ve heard that people from us and uk are coming to Paris because they don’t really have the same thing at home. \n\nI wonder if Germans have a similar thing. \n\nAnd finally I was wondering today if the last time with slept in the same bed if you forced yourself to try something physical with me \n\nIt’s now 23:39 and I guess you probably have classes tomorrow and I want to read you a story for tonight maybe tonight will be the night you use it who knows. \n\nI wish you a good night kitten"
-      },
-      {
-        title: "The beginning of something new",
-        date: "Samstag, June 20, 2026",
-        body: "Here's the first entry in this one of a kind diary. Diaries have historically always been a personal thing, never meant to be shared with anyone. That's why this one is going to be a special one.\n\nKim have you ever thought about how once things have a name they become more normal?\n\nThe concept of a shared personal diary was never really a thing I guess but if I give it a name maybe it will feel to us two as something more normal than what it really is ?\n\nI guess the impersonal diary could do the job, you know me Kim I was always more of a pragmatic guy before anything else. \n\nI’m not sure what I am trying to achieve throughout this ordeal. But I’ve been thinking about writing stuff to you for so many days that I thought there’s got to be a better way and I got the idea of writing this to you even if it could possibly be that you don’t even open this website anymore. \n\nMaybe you will and you’ll get to see my thoughts, maybe you won’t and I will simply write all of this into the void, in any case I like the idea of a place where all my thoughts are for you to see (and consequently the rest of the world but I’ll figure that out someday). \n\nA place where I can share with the real Kim everything that’s happening within my mind with the Kim that still lives there in my thoughts, in my dreams every single day. \n\nI feel like we don’t create enough anymore and this “we” is a very broad we. I’m going to use this as a first step towards creating something. \n\nNow I’ve just realised that this one will be extremely long as it will hold all the thoughts I remember having for multiple days. I hope if you ever read this you don’t become bored. \n\nAs I write this I keep opening WhatsApp and seeing you online, when I wrote this it was 02:32 we had that last discussion that started in the morning with me trying to explain why I’m still so jealous. \n\nI’m wondering if you’re discussing with him, talking about funny stuff with your friends, or doing like me and reading our old messages. \n\nI say this because I have been doing this a ton these last few days. Even before I realised you had someone new in your life. \n\nI went through our texts in the period leading to our first meeting. It was so beautiful, you were so radiant with energy. We were so damn cute. I went through the texts while I was in Bielefeld for the first time when I had slept in the car. We were so ready to see each other again. \n\nLife was truly beautiful. \n\nIt’s now 38 and you’re still online did you fall asleep on the phone ?\n\nI just wish I could see you even from a distance, get closer and give you a smile I’d be bawling my eyes out but the things I would do to be able to hold you, put my hand in the back of your head and make you feel safe. \n\nI crave you with every cell in my body Kim. \n\nAnd what’s worse is that it’s only been increasing. All of my partners I managed to move on even my very first love. But with you I feel a clear difference. \n\nYou’re the only one that truly understood me, the only one who actually made me smile by your presence. Made me laugh. Never judged me \n\n45 I see that you’re not online anymore I hope you’ll sleep tight and have nice dreams Mausi. \n\nYou keep saying that you’ve stopped holding onto what could’ve been so you can finally heal, and I’m truly happy to hear you say that because in the future I think you’ll manage to do that for good. \n\nBut as for me. \n\nI want none of that. \n\nI want you to move on. \n\nBut I do not want to move on. I want to stay as deeply in love with you as I can. I want to suffer and crave you every day. I want to wake up every morning hugging my pillow as if it was my Mausi. \n\nThat feeling I got when falling asleep with you, is without the shadow of a doubt the absolute climax of human experience. Knowing the person I for once my life was truly in love with, and in return was truly in love with me. \n\nThe fact that you felt safe in my arms even if this whole situation could have been dangerous for you. The fact that you brought Hundi with you and that you both felt safe in my arms. \n\nI know that nothing will ever make me feel more at peace \n\n55 you’re still offline it looks like you really are asleep. \n\nWhat I would give to just wrap my arms around you this instant. \n\nI’ve been thinking about myself throughout our breakup, why I am the way I am. \n\nBecause I think our breakup is my sole responsibility. Simply because I can’t accept criticism and I take everything personally. \n\nI think that to this day this was what made you lose faith in us. \n\nA part of me tells me if I could just get rid of this, I could be the man you loved without all the negativity that pushed you away. \n\nDo people not change ?\n\nAm I doomed to always be so easily annoyed? I refuse to accept that the answer is yes. I refuse to be that person so much. It wasn’t always me I remember being a different person years ago. \n\nBut these are only thoughts what matters will always be actions. \n\nThat’s why I’ve decided I was going to change. \n\nNot just for us Kim. But first for me, so that I can one day feel safe in approaching you knowing full well that I could give you the life you deserve. \n\nI don’t want to be your man while I am so weak. I want to be capable of loving you rightfully before that. \n\nThis isn’t the first time I’ve been thinking about this. I have actually started applying this to my daily life. I’m trying to not get angry at all anymore. \n\nFirst by trying to notice when a situation could lead to me raising my voice and remembering you. Remembering what pushed you away and it’s instantly better. \n\nI’ve tried driving without even the slightest hint that I’m angry and I can already tell a difference. I don’t scream when people cut me off or behave like idiots on the road. I make sure I don't get annoyed at my mother anymore. I make sure my colleagues at work don't feel when I'm annoyed.\n And you're helping me in each of those situations, I think about us holding each other in our arms, falling asleep or I think the prettiest sight I have ever laid my eyes on. \nI think about your eyes when I was holding you in my arms and staring at you there was special in your already incredible eyes. \nYou’re like a lighthouse bringing me back to safe grounds in my own mind. \n\nI want to be the best version of myself.\n\nFor me \n\nFor us\n\nFor you \n\nFor all those promises I’ve made that I still want to make a reality. \n\nWill this ever be enough? \n\nWill you ever even feel like reaching out to me so I could prove to you that I’ve changed?\n\nWill those changes be significant enough for you to start wondering if you could trust me again? \n\nWill you find someone who actually could fill those shoes and will make you happy. \n\nIt’s selfish for me to say this but a part of me wants to make sure it’s going to be me because only I can make sure that you’re safe and living a good life. How could I trust a stranger with my Kim ?\n\nI cannot accept it that easily \n\nRecently I have been thinking about that picture of the burning flowers how good it looked and how you kept it on your phone for so long. \n\nI want to make an even better version of it. \n\nI have had this vision in my head for weeks now \n\nMy whole left arm and the flowers engulfed in flames, the flowers would be pointed towards a black space in the picture. \n\nAnd you would be either represented by the 7 planets or a shadowy figure. \n\nI need to see this vision come to life. I feel like an artist that needs to express himself. Do you remember why the 7 planets ?\n\nOur first meeting was the day the 7 planets aligned in the sky the next will be in 2040 I find it so poetic. \n\nBut I can’t wait for them to realign in 2040 I want to realign them myself before\n\nIt’s getting quite late 03:28 I’m going to go to bed my reason to keep going \n\nI love this nickname but I wish I found a language that expressed this in a manner that pleased my ears. \n\nI hope you’re doing good wherever you are "
-      },
-];
-
     function fmt(s) {
       s = Math.floor(s);
       return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
@@ -228,143 +188,152 @@
     const audios = [];
     const liked  = JSON.parse(localStorage.getItem('diary-likes') || '{}');
 
-    entries.forEach((entry, i) => {
-      const card = document.createElement('div');
-      card.className = 'diary-card';
+    function buildCards(entries) {
+      entries.forEach((entry, i) => {
+        const card = document.createElement('div');
+        card.className = 'diary-card';
 
-      const audioHTML = entry.src ? `
-        <audio id="daudio-${i}" src="${entry.src}" preload="metadata"></audio>
-        <div class="audio-wrap">
-          <div class="prog-track" id="dtrack-${i}">
-            <div class="prog-fill" id="dfill-${i}"></div>
-          </div>
-          <div class="controls">
-            <button class="play-btn" id="dbtn-${i}" aria-label="Play entry">
-              <i class="ti ti-player-play" id="dicon-${i}"></i>
+        const audioHTML = entry.src ? `
+          <audio id="daudio-${i}" src="${entry.src}" preload="metadata"></audio>
+          <div class="audio-wrap">
+            <div class="prog-track" id="dtrack-${i}">
+              <div class="prog-fill" id="dfill-${i}"></div>
+            </div>
+            <div class="controls">
+              <button class="play-btn" id="dbtn-${i}" aria-label="Play entry">
+                <i class="ti ti-player-play" id="dicon-${i}"></i>
+              </button>
+              <span class="time-txt" id="dtime-${i}">0:00 / --:--</span>
+            </div>
+          </div>` : '';
+
+        const bodyHTML = entry.body
+          ? `<div class="diary-body">${entry.body}</div>`
+          : '';
+
+        card.innerHTML = `
+          <div class="card-row" id="row-${i}">
+            <div class="diary-badge">
+              <i class="ti ti-${entry.src ? 'microphone' : 'pencil'}" aria-hidden="true"></i>
+            </div>
+            <div class="card-meta">
+              <div class="diary-title">${entry.title}</div>
+              <div class="diary-date">${entry.date}</div>
+            </div>
+            <button class="heart-btn" id="heart-${i}" aria-label="Like this entry">
+              <i class="ti ti-heart" id="hearticon-${i}"></i>
             </button>
-            <span class="time-txt" id="dtime-${i}">0:00 / --:--</span>
+            <div class="chevron" id="chev-${i}"><i class="ti ti-chevron-down"></i></div>
           </div>
-        </div>` : '';
-
-      const bodyHTML = entry.body
-        ? `<div class="diary-body">${entry.body}</div>`
-        : '';
-
-      card.innerHTML = `
-        <div class="card-row" id="row-${i}">
-          <div class="diary-badge">
-            <i class="ti ti-${entry.src ? 'microphone' : 'pencil'}" aria-hidden="true"></i>
+          <div class="card-body" id="body-${i}">
+            <div class="body-inner">
+              ${audioHTML}
+              ${bodyHTML}
+            </div>
           </div>
-          <div class="card-meta">
-            <div class="diary-title">${entry.title}</div>
-            <div class="diary-date">${entry.date}</div>
-          </div>
-          <button class="heart-btn" id="heart-${i}" aria-label="Like this entry">
-            <i class="ti ti-heart" id="hearticon-${i}"></i>
-          </button>
-          <div class="chevron" id="chev-${i}"><i class="ti ti-chevron-down"></i></div>
-        </div>
-        <div class="card-body" id="body-${i}">
-          <div class="body-inner">
-            ${audioHTML}
-            ${bodyHTML}
-          </div>
-        </div>
-      `;
-      list.appendChild(card);
+        `;
+        list.appendChild(card);
 
-      /* ── Accordion toggle with dynamic height ── */
-      document.getElementById(`row-${i}`).addEventListener('click', (e) => {
-        if (e.target.closest('.heart-btn')) return;
-        const body = document.getElementById(`body-${i}`);
-        const chev = document.getElementById(`chev-${i}`);
-        const isOpen = body.classList.contains('open');
-
-        document.querySelectorAll('.card-body.open').forEach(b => {
-          b.style.maxHeight = '0';
-          b.classList.remove('open');
-        });
-        document.querySelectorAll('.chevron').forEach(c => c.style.transform = '');
-
-        if (!isOpen) {
-          body.classList.add('open');
-          body.style.maxHeight = body.scrollHeight + 'px';
-          chev.style.transform = 'rotate(180deg)';
-        }
-      });
-
-      /* ── Heart ── */
-      document.getElementById(`heart-${i}`).addEventListener('click', function () {
-        liked[i] = !liked[i];
-        this.classList.toggle('liked', liked[i]);
-        document.getElementById(`hearticon-${i}`).className = liked[i] ? 'ti ti-heart-filled' : 'ti ti-heart';
-        localStorage.setItem('diary-likes', JSON.stringify(liked));
-      });
-
-      /* ── Audio player ── */
-      if (entry.src) {
-        const audio = document.getElementById(`daudio-${i}`);
-        audios.push({ el: audio, idx: i });
-
-        audio.addEventListener('loadedmetadata', () => {
-          const d = fmt(audio.duration);
-          document.getElementById(`dtime-${i}`).textContent = `0:00 / ${d}`;
-        });
-        audio.addEventListener('timeupdate', () => {
-          const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
-          document.getElementById(`dfill-${i}`).style.width = `${Math.round(pct)}%`;
-          const d = audio.duration ? fmt(audio.duration) : '--:--';
-          document.getElementById(`dtime-${i}`).textContent = `${fmt(audio.currentTime)} / ${d}`;
-        });
-        audio.addEventListener('ended', () => {
-          document.getElementById(`dicon-${i}`).className = 'ti ti-player-play';
-          document.getElementById(`dfill-${i}`).style.width = '0%';
-          audio.currentTime = 0;
-        });
-
-        document.getElementById(`dbtn-${i}`).addEventListener('click', () => {
-          const isPlaying = !audio.paused;
-          if (isPlaying) {
-            audio.pause();
-            document.getElementById(`dicon-${i}`).className = 'ti ti-player-play';
-          } else {
-            audios.forEach(({ el, idx }) => {
-              if (idx !== i && !el.paused) {
-                el.pause();
-                document.getElementById(`dicon-${idx}`).className = 'ti ti-player-play';
-              }
-            });
-            audio.play();
-            document.getElementById(`dicon-${i}`).className = 'ti ti-player-pause';
+        /* ── Accordion toggle with dynamic height ── */
+        document.getElementById(`row-${i}`).addEventListener('click', (e) => {
+          if (e.target.closest('.heart-btn')) return;
+          const body = document.getElementById(`body-${i}`);
+          const chev = document.getElementById(`chev-${i}`);
+          const isOpen = body.classList.contains('open');
+          document.querySelectorAll('.card-body.open').forEach(b => {
+            b.style.maxHeight = '0';
+            b.classList.remove('open');
+          });
+          document.querySelectorAll('.chevron').forEach(c => c.style.transform = '');
+          if (!isOpen) {
+            body.classList.add('open');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            chev.style.transform = 'rotate(180deg)';
           }
         });
 
-        document.getElementById(`dtrack-${i}`).addEventListener('click', (e) => {
-          if (!audio.duration) return;
-          const rect = e.currentTarget.getBoundingClientRect();
-          audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+        /* ── Heart ── */
+        document.getElementById(`heart-${i}`).addEventListener('click', function () {
+          liked[i] = !liked[i];
+          this.classList.toggle('liked', liked[i]);
+          document.getElementById(`hearticon-${i}`).className = liked[i] ? 'ti ti-heart-filled' : 'ti ti-heart';
+          localStorage.setItem('diary-likes', JSON.stringify(liked));
         });
-      }
-    });
 
-    /* ── Restore saved likes ── */
-    Object.keys(liked).forEach(k => {
-      if (!liked[k]) return;
-      const btn = document.getElementById(`heart-${k}`);
-      if (btn) {
-        btn.classList.add('liked');
-        document.getElementById(`hearticon-${k}`).className = 'ti ti-heart-filled';
-      }
-    });
+        /* ── Audio player ── */
+        if (entry.src) {
+          const audio = document.getElementById(`daudio-${i}`);
+          audios.push({ el: audio, idx: i });
 
-    /* ── Scroll reveal ── */
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.diary-card').forEach((c, i) => {
-      c.style.transitionDelay = `${i * 0.05}s`;
-      io.observe(c);
-    });
+          audio.addEventListener('loadedmetadata', () => {
+            const d = fmt(audio.duration);
+            document.getElementById(`dtime-${i}`).textContent = `0:00 / ${d}`;
+          });
+          audio.addEventListener('timeupdate', () => {
+            const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+            document.getElementById(`dfill-${i}`).style.width = `${Math.round(pct)}%`;
+            const d = audio.duration ? fmt(audio.duration) : '--:--';
+            document.getElementById(`dtime-${i}`).textContent = `${fmt(audio.currentTime)} / ${d}`;
+          });
+          audio.addEventListener('ended', () => {
+            document.getElementById(`dicon-${i}`).className = 'ti ti-player-play';
+            document.getElementById(`dfill-${i}`).style.width = '0%';
+            audio.currentTime = 0;
+          });
+
+          document.getElementById(`dbtn-${i}`).addEventListener('click', () => {
+            const isPlaying = !audio.paused;
+            if (isPlaying) {
+              audio.pause();
+              document.getElementById(`dicon-${i}`).className = 'ti ti-player-play';
+            } else {
+              audios.forEach(({ el, idx }) => {
+                if (idx !== i && !el.paused) {
+                  el.pause();
+                  document.getElementById(`dicon-${idx}`).className = 'ti ti-player-play';
+                }
+              });
+              audio.play();
+              document.getElementById(`dicon-${i}`).className = 'ti ti-player-pause';
+            }
+          });
+
+          document.getElementById(`dtrack-${i}`).addEventListener('click', (e) => {
+            if (!audio.duration) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+          });
+        }
+      });
+
+      /* ── Restore saved likes ── */
+      Object.keys(liked).forEach(k => {
+        if (!liked[k]) return;
+        const btn = document.getElementById(`heart-${k}`);
+        if (btn) {
+          btn.classList.add('liked');
+          document.getElementById(`hearticon-${k}`).className = 'ti ti-heart-filled';
+        }
+      });
+
+      /* ── Scroll reveal ── */
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.diary-card').forEach((c, i) => {
+        c.style.transitionDelay = `${i * 0.05}s`;
+        io.observe(c);
+      });
+    }
+
+    /* ── Load entries from JSON ── */
+    fetch('entries.json')
+      .then(r => r.json())
+      .then(entries => buildCards(entries))
+      .catch(err => {
+        console.error('Could not load entries.json:', err);
+        list.innerHTML = '<p style="text-align:center;color:#888;padding:2rem">Could not load entries.</p>';
+      });
   </script>
 
 </body>
