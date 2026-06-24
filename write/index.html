@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New entry</title>
+  <title>Write</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,31 +15,37 @@
       padding: 2rem 1rem 3rem;
     }
 
-    .page-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .page-header h1 { font-size: 20px; font-weight: 500; }
-    .page-header p  { font-size: 13px; color: #888; margin-top: 5px; }
-
-    .form {
+    /* ── Password screen ── */
+    #lock-screen {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
       gap: 14px;
+    }
+    #lock-screen h1 { font-size: 18px; font-weight: 500; }
+    #lock-screen p  { font-size: 13px; color: #888; }
+
+    /* ── Shared UI ── */
+    .container {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
       max-width: 520px;
       margin: 0 auto;
     }
+    .container.visible { display: flex; }
+
+    .page-header { text-align: center; margin-bottom: 0.5rem; }
+    .page-header h1 { font-size: 20px; font-weight: 500; }
+    .page-header p  { font-size: 13px; color: #888; margin-top: 5px; }
 
     label {
-      font-size: 12px;
-      font-weight: 500;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      display: block;
-      margin-bottom: 5px;
+      font-size: 12px; font-weight: 500; color: #888;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      display: block; margin-bottom: 5px;
     }
-
     input, textarea {
       width: 100%;
       background: #ffffff;
@@ -53,175 +59,239 @@
       transition: border-color 0.15s;
     }
     input:focus, textarea:focus { border-color: #D4537E; }
-
-    textarea {
-      min-height: 220px;
-      resize: vertical;
-      line-height: 1.6;
-    }
+    textarea { min-height: 200px; resize: vertical; line-height: 1.6; }
 
     .btn {
-      background: #D4537E;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 0.85rem;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: opacity 0.15s, transform 0.1s;
+      background: #D4537E; color: #fff; border: none;
+      border-radius: 10px; padding: 0.85rem;
+      font-size: 15px; font-weight: 500;
+      cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+      width: 100%;
     }
     .btn:active { opacity: 0.85; transform: scale(0.98); }
-
-    /* output block */
-    .output-wrap {
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-    .output-wrap.visible { display: flex; }
-
-    .output-label {
-      font-size: 13px;
-      color: #888;
-    }
-    .output-label strong { color: #1a1a1a; }
-
-    .output-box {
-      background: #ffffff;
-      border: 0.5px solid rgba(0,0,0,0.12);
-      border-radius: 10px;
-      padding: 0.9rem;
-      font-family: 'Menlo', 'Courier New', monospace;
-      font-size: 13px;
-      color: #1a1a1a;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-
-    .copy-btn {
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-secondary {
       background: #f4f4f2;
       border: 0.5px solid rgba(0,0,0,0.12);
-      border-radius: 10px;
-      padding: 0.75rem;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
       color: #1a1a1a;
     }
-    .copy-btn:active { transform: scale(0.98); }
-    .copy-btn.copied { color: #D4537E; border-color: #D4537E; }
 
-    .divider {
-      height: 0.5px;
-      background: rgba(0,0,0,0.08);
-      margin: 0.5rem 0;
+    .status {
+      font-size: 13px; text-align: center; padding: 0.5rem;
+      border-radius: 8px; display: none;
     }
+    .status.visible { display: block; }
+    .status.ok  { background: #e8f5e9; color: #2e7d32; }
+    .status.err { background: #fdecea; color: #c62828; }
 
-    .reset-btn {
-      background: none;
-      border: none;
-      font-size: 13px;
-      color: #aaa;
-      cursor: pointer;
-      text-align: center;
-      padding: 0.5rem;
-      text-decoration: underline;
+    .divider { height: 0.5px; background: rgba(0,0,0,0.08); }
+
+    /* ── Existing entries list ── */
+    .entries-header {
+      display: flex; align-items: center; justify-content: space-between;
     }
+    .entries-header h2 { font-size: 15px; font-weight: 500; }
+    .entries-header span { font-size: 12px; color: #888; }
+
+    .entry-item {
+      background: #fff;
+      border: 0.5px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .entry-item-meta { flex: 1; min-width: 0; }
+    .entry-item-title {
+      font-size: 14px; font-weight: 500;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .entry-item-date { font-size: 11px; color: #aaa; margin-top: 2px; }
+    .delete-btn {
+      background: none; border: none; cursor: pointer;
+      font-size: 18px; color: #ccc; padding: 4px;
+      transition: color 0.15s;
+      flex-shrink: 0;
+    }
+    .delete-btn:hover { color: #D4537E; }
   </style>
 </head>
 <body>
 
-  <div class="page-header">
-    <h1>New diary entry</h1>
-    <p></p>
+  <!-- ── Password screen ── -->
+  <div id="lock-screen">
+    <h1>🔒 Enter password</h1>
+    <p>This page is private</p>
+    <input type="password" id="pwd-input" placeholder="Password" style="max-width:280px;text-align:center"
+      onkeydown="if(event.key==='Enter') unlock()" />
+    <button class="btn" style="max-width:280px" onclick="unlock()">Enter</button>
+    <p id="pwd-error" style="color:#c62828;font-size:13px;display:none">Wrong password</p>
   </div>
 
-  <!-- ── Input form ── -->
-  <div class="form" id="form">
+  <!-- ── Main interface ── -->
+  <div class="container" id="app">
+
+    <div class="page-header">
+      <h1>New diary entry</h1>
+      <p>Write freely — saves directly to the website</p>
+    </div>
+
     <div>
       <label for="title">Title</label>
       <input type="text" id="title" placeholder="Give this entry a name…" />
     </div>
     <div>
       <label for="date">Date</label>
-      <input type="text" id="date" placeholder="e.g. Monday, June 22, 2026" />
+      <input type="text" id="date" />
     </div>
     <div>
       <label for="body">Entry</label>
       <textarea id="body" placeholder="Write whatever you want. Press Enter normally for new lines…"></textarea>
     </div>
-    <button class="btn" onclick="generate()">Generate JSON block ↓</button>
-  </div>
 
-  <div class="divider" style="max-width:520px;margin:1.5rem auto"></div>
+    <button class="btn" id="save-btn" onclick="saveEntry()">Save entry to website</button>
+    <div class="status" id="status"></div>
 
-  <!-- ── Output ── -->
-  <div class="output-wrap" id="output">
-    <p class="output-label">Copy this block and paste it into your <strong>entries.json</strong> file:</p>
-    <div class="output-box" id="result"></div>
-    <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy to clipboard</button>
-    <button class="reset-btn" onclick="reset()">Write another entry</button>
+    <div class="divider"></div>
+
+    <div class="entries-header">
+      <h2>Existing entries</h2>
+      <span id="entry-count"></span>
+    </div>
+
+    <div id="entries-list"></div>
+
   </div>
 
   <script>
-    /* Pre-fill today's date */
-    const today = new Date();
-    const formatted = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    document.getElementById('date').value = formatted;
+    let PASSWORD = '';
+    let currentSha = null;
+    let currentEntries = [];
 
-    function generate() {
+    /* ── Pre-fill today's date ── */
+    const today = new Date();
+    document.getElementById('date').value = today.toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    /* ── Unlock ── */
+    function unlock() {
+      const pwd = document.getElementById('pwd-input').value;
+      if (!pwd) return;
+      PASSWORD = pwd;
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('app').classList.add('visible');
+      loadEntries();
+    }
+
+    /* ── Load existing entries ── */
+    async function loadEntries() {
+      const list = document.getElementById('entries-list');
+      list.innerHTML = '<p style="color:#888;font-size:13px">Loading…</p>';
+      try {
+        const r = await fetch('/api/save', {
+          headers: { 'x-password': PASSWORD }
+        });
+        if (r.status === 401) {
+          showStatus('Wrong password — please reload and try again.', 'err');
+          list.innerHTML = '';
+          return;
+        }
+        const data = await r.json();
+        currentEntries = data.entries || [];
+        currentSha = data.sha;
+        renderEntries();
+      } catch (e) {
+        list.innerHTML = '<p style="color:#c62828;font-size:13px">Could not load entries.</p>';
+      }
+    }
+
+    /* ── Render entry list ── */
+    function renderEntries() {
+      const list = document.getElementById('entries-list');
+      document.getElementById('entry-count').textContent = `${currentEntries.length} entries`;
+      if (currentEntries.length === 0) {
+        list.innerHTML = '<p style="color:#888;font-size:13px;text-align:center;padding:1rem">No entries yet.</p>';
+        return;
+      }
+      list.innerHTML = currentEntries.map((e, i) => `
+        <div class="entry-item">
+          <div class="entry-item-meta">
+            <div class="entry-item-title">${e.title}</div>
+            <div class="entry-item-date">${e.date}</div>
+          </div>
+          <button class="delete-btn" onclick="deleteEntry(${i})" title="Delete">✕</button>
+        </div>
+      `).join('');
+    }
+
+    /* ── Save new entry ── */
+    async function saveEntry() {
       const title = document.getElementById('title').value.trim();
       const date  = document.getElementById('date').value.trim();
       const body  = document.getElementById('body').value;
 
-      if (!title) { alert('Please add a title.'); return; }
-      if (!body.trim()) { alert('The entry is empty.'); return; }
+      if (!title) { showStatus('Please add a title.', 'err'); return; }
+      if (!body.trim()) { showStatus('The entry is empty.', 'err'); return; }
 
-      /* Escape special JSON characters */
-      const escaped = body
-        .replace(/\\/g, '\\\\')
-        .replace(/"/g, '\\"')
-        .replace(/\n/g, '\\n')
-        .replace(/\r/g, '');
+      const btn = document.getElementById('save-btn');
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
 
-      const block = `{
-  "title": "${title.replace(/"/g, '\\"')}",
-  "date": "${date.replace(/"/g, '\\"')}",
-  "body": "${escaped}"
-}`;
+      const newEntry = { title, date, body };
+      const updated = [newEntry, ...currentEntries]; // newest first
 
-      document.getElementById('result').textContent = block;
-      document.getElementById('output').classList.add('visible');
-      document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const ok = await pushToGitHub(updated);
+      if (ok) {
+        currentEntries = updated;
+        renderEntries();
+        document.getElementById('title').value = '';
+        document.getElementById('body').value = '';
+        showStatus('Saved! The website will update in ~30 seconds.', 'ok');
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Save entry to website';
     }
 
-    function copyResult() {
-      const text = document.getElementById('result').textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById('copyBtn');
-        btn.textContent = 'Copied ✓';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = 'Copy to clipboard';
-          btn.classList.remove('copied');
-        }, 2000);
-      });
+    /* ── Delete entry ── */
+    async function deleteEntry(index) {
+      if (!confirm(`Delete "${currentEntries[index].title}"?`)) return;
+      const updated = currentEntries.filter((_, i) => i !== index);
+      const ok = await pushToGitHub(updated);
+      if (ok) {
+        currentEntries = updated;
+        renderEntries();
+        showStatus('Entry deleted.', 'ok');
+      }
     }
 
-    function reset() {
-      document.getElementById('title').value = '';
-      document.getElementById('body').value = '';
-      document.getElementById('date').value = formatted;
-      document.getElementById('result').textContent = '';
-      document.getElementById('output').classList.remove('visible');
-      document.getElementById('copyBtn').textContent = 'Copy to clipboard';
-      document.getElementById('copyBtn').classList.remove('copied');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    /* ── Push to GitHub via serverless function ── */
+    async function pushToGitHub(entries) {
+      try {
+        const r = await fetch('/api/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-password': PASSWORD,
+          },
+          body: JSON.stringify({ entries, sha: currentSha }),
+        });
+        const data = await r.json();
+        if (!r.ok) { showStatus(`Error: ${data.error}`, 'err'); return false; }
+        currentSha = data.sha;
+        return true;
+      } catch (e) {
+        showStatus(`Network error: ${e.message}`, 'err');
+        return false;
+      }
+    }
+
+    /* ── Status message ── */
+    function showStatus(msg, type) {
+      const el = document.getElementById('status');
+      el.textContent = msg;
+      el.className = `status visible ${type}`;
+      setTimeout(() => el.classList.remove('visible'), 5000);
     }
   </script>
 
