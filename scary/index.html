@@ -300,7 +300,7 @@
     }
 
     /* ── Load stories from JSON ── */
-    fetch('scary.json')
+    fetch('scary/scary.json')
       .then(r => r.json())
       .then(stories => buildCards(stories))
       .catch(err => {
