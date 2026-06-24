@@ -17,7 +17,6 @@
       padding-bottom: 80px;
     }
 
-    /* ── Bottom nav ── */
     .bottom-nav {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -44,7 +43,6 @@
     .nav-item i { font-size: 22px; }
     .nav-item.active { color: #2563eb; }
 
-    /* ── Page header ── */
     .page-header {
       text-align: center;
       padding: 2.5rem 1rem 1.5rem;
@@ -52,7 +50,6 @@
     .page-header h1 { font-size: 22px; font-weight: 500; color: #1a1a1a; }
     .page-header p  { font-size: 13px; color: #888; margin-top: 6px; }
 
-    /* ── Story list ── */
     .story-list {
       display: flex;
       flex-direction: column;
@@ -62,7 +59,6 @@
       margin: 0 auto;
     }
 
-    /* ── Card (accordion) ── */
     .story-card {
       background: #ffffff;
       border: 0.5px solid rgba(0,0,0,0.1);
@@ -74,7 +70,6 @@
     }
     .story-card.visible { opacity: 1; transform: translateY(0); }
 
-    /* always-visible row */
     .card-row {
       display: flex;
       align-items: center;
@@ -108,13 +103,11 @@
     }
     .chevron i { font-size: 15px; }
 
-    /* collapsible player */
     .card-body {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
-    .card-body.open { max-height: 120px; }
     .body-inner {
       padding: 0 0.9rem 0.9rem;
       display: flex; flex-direction: column; gap: 8px;
@@ -152,7 +145,6 @@
 
   <div class="story-list" id="list"></div>
 
-  <!-- ── Bottom navigation ── -->
   <nav class="bottom-nav">
     <a href="/" class="nav-item">
       <i class="ti ti-book" aria-hidden="true"></i>
@@ -177,15 +169,6 @@
       }
     });
 
-    /* ── EDIT YOUR STORIES HERE ── */
-    const stories = [
-      { title: "Meditation",                                    src: "AUDIO/Mindfullness.mp3" },
-      { title: "The rainbowfish + Oh no, the Leaves are Gone", src: "AUDIO/fallleave.mp3" },
-      { title: "Richard the Meerkat and the Little Gecko",     src: "AUDIO/Richardthemeerkatandthelittlegecko.mp3" },
-      { title: "Princess Jessie and the Unicorn",              src: "AUDIO/PrincessJessieandtheUnicorn.mp3" },
-      { title: "The bird girl",                                 src: "AUDIO/junglebird.mp3" },
-    ];
-
     function fmt(s) {
       s = Math.floor(s);
       return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
@@ -195,122 +178,137 @@
     const audioEls = [];
     const liked = JSON.parse(localStorage.getItem('story-likes') || '{}');
 
-    stories.forEach((story, i) => {
-      const card = document.createElement('div');
-      card.className = 'story-card';
-      card.innerHTML = `
-        <div class="card-row" id="row-${i}">
-          <div class="card-num-badge"><span>${String(i + 1).padStart(2, '0')}</span></div>
-          <span class="card-title">${story.title}</span>
-          <button class="heart-btn" id="heart-${i}" aria-label="Like ${story.title}">
-            <i class="ti ti-heart" id="hearticon-${i}"></i>
-          </button>
-          <div class="chevron" id="chev-${i}"><i class="ti ti-chevron-down"></i></div>
-        </div>
-        <div class="card-body" id="body-${i}">
-          <div class="body-inner">
-            <audio id="audio-${i}" src="${story.src}" preload="metadata"></audio>
-            <div class="card-dur">
-              <i class="ti ti-clock" aria-hidden="true" style="font-size:11px"></i>
-              <span id="dur-${i}">--:--</span>
-            </div>
-            <div class="prog-track" id="track-${i}">
-              <div class="prog-fill" id="fill-${i}"></div>
-            </div>
-            <div class="controls">
-              <button class="play-btn" id="btn-${i}" aria-label="Play ${story.title}">
-                <i class="ti ti-player-play" id="icon-${i}"></i>
-              </button>
-              <span class="time-txt" id="time-${i}">0:00 / --:--</span>
+    function buildCards(stories) {
+      stories.forEach((story, i) => {
+        const card = document.createElement('div');
+        card.className = 'story-card';
+        card.innerHTML = `
+          <div class="card-row" id="row-${i}">
+            <div class="card-num-badge"><span>${String(i + 1).padStart(2, '0')}</span></div>
+            <span class="card-title">${story.title}</span>
+            <button class="heart-btn" id="heart-${i}" aria-label="Like ${story.title}">
+              <i class="ti ti-heart" id="hearticon-${i}"></i>
+            </button>
+            <div class="chevron" id="chev-${i}"><i class="ti ti-chevron-down"></i></div>
+          </div>
+          <div class="card-body" id="body-${i}">
+            <div class="body-inner">
+              <audio id="audio-${i}" src="${story.src}" preload="metadata"></audio>
+              <div class="card-dur">
+                <i class="ti ti-clock" aria-hidden="true" style="font-size:11px"></i>
+                <span id="dur-${i}">--:--</span>
+              </div>
+              <div class="prog-track" id="track-${i}">
+                <div class="prog-fill" id="fill-${i}"></div>
+              </div>
+              <div class="controls">
+                <button class="play-btn" id="btn-${i}" aria-label="Play ${story.title}">
+                  <i class="ti ti-player-play" id="icon-${i}"></i>
+                </button>
+                <span class="time-txt" id="time-${i}">0:00 / --:--</span>
+              </div>
             </div>
           </div>
-        </div>
-      `;
-      list.appendChild(card);
+        `;
+        list.appendChild(card);
 
-      /* ── Accordion toggle ── */
-      document.getElementById(`row-${i}`).addEventListener('click', (e) => {
-        if (e.target.closest('.heart-btn')) return;
-        const body = document.getElementById(`body-${i}`);
-        const chev = document.getElementById(`chev-${i}`);
-        const isOpen = body.classList.contains('open');
-        document.querySelectorAll('.card-body.open').forEach(b => b.classList.remove('open'));
-        document.querySelectorAll('.chevron').forEach(c => c.style.transform = '');
-        if (!isOpen) {
-          body.classList.add('open');
-          chev.style.transform = 'rotate(180deg)';
-        }
-      });
-
-      const audio = document.getElementById(`audio-${i}`);
-      audioEls.push(audio);
-
-      audio.addEventListener('loadedmetadata', () => {
-        const d = fmt(audio.duration);
-        document.getElementById(`dur-${i}`).textContent = d;
-        document.getElementById(`time-${i}`).textContent = `0:00 / ${d}`;
-      });
-      audio.addEventListener('timeupdate', () => {
-        const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
-        document.getElementById(`fill-${i}`).style.width = `${Math.round(pct)}%`;
-        const d = audio.duration ? fmt(audio.duration) : '--:--';
-        document.getElementById(`time-${i}`).textContent = `${fmt(audio.currentTime)} / ${d}`;
-      });
-      audio.addEventListener('ended', () => {
-        document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
-        document.getElementById(`fill-${i}`).style.width = '0%';
-        audio.currentTime = 0;
-      });
-
-      document.getElementById(`btn-${i}`).addEventListener('click', () => {
-        const isPlaying = !audio.paused;
-        if (isPlaying) {
-          audio.pause();
-          document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
-        } else {
-          audioEls.forEach((a, j) => {
-            if (j !== i && !a.paused) {
-              a.pause();
-              document.getElementById(`icon-${j}`).className = 'ti ti-player-play';
-            }
+        /* ── Accordion toggle ── */
+        document.getElementById(`row-${i}`).addEventListener('click', (e) => {
+          if (e.target.closest('.heart-btn')) return;
+          const body = document.getElementById(`body-${i}`);
+          const chev = document.getElementById(`chev-${i}`);
+          const isOpen = body.classList.contains('open');
+          document.querySelectorAll('.card-body.open').forEach(b => {
+            b.style.maxHeight = '0';
+            b.classList.remove('open');
           });
-          audio.play();
-          document.getElementById(`icon-${i}`).className = 'ti ti-player-pause';
+          document.querySelectorAll('.chevron').forEach(c => c.style.transform = '');
+          if (!isOpen) {
+            body.classList.add('open');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            chev.style.transform = 'rotate(180deg)';
+          }
+        });
+
+        const audio = document.getElementById(`audio-${i}`);
+        audioEls.push(audio);
+
+        audio.addEventListener('loadedmetadata', () => {
+          const d = fmt(audio.duration);
+          document.getElementById(`dur-${i}`).textContent = d;
+          document.getElementById(`time-${i}`).textContent = `0:00 / ${d}`;
+        });
+        audio.addEventListener('timeupdate', () => {
+          const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+          document.getElementById(`fill-${i}`).style.width = `${Math.round(pct)}%`;
+          const d = audio.duration ? fmt(audio.duration) : '--:--';
+          document.getElementById(`time-${i}`).textContent = `${fmt(audio.currentTime)} / ${d}`;
+        });
+        audio.addEventListener('ended', () => {
+          document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
+          document.getElementById(`fill-${i}`).style.width = '0%';
+          audio.currentTime = 0;
+        });
+
+        document.getElementById(`btn-${i}`).addEventListener('click', () => {
+          const isPlaying = !audio.paused;
+          if (isPlaying) {
+            audio.pause();
+            document.getElementById(`icon-${i}`).className = 'ti ti-player-play';
+          } else {
+            audioEls.forEach((a, j) => {
+              if (j !== i && !a.paused) {
+                a.pause();
+                document.getElementById(`icon-${j}`).className = 'ti ti-player-play';
+              }
+            });
+            audio.play();
+            document.getElementById(`icon-${i}`).className = 'ti ti-player-pause';
+          }
+        });
+
+        document.getElementById(`track-${i}`).addEventListener('click', (e) => {
+          if (!audio.duration) return;
+          const rect = e.currentTarget.getBoundingClientRect();
+          audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+        });
+
+        document.getElementById(`heart-${i}`).addEventListener('click', function () {
+          liked[i] = !liked[i];
+          this.classList.toggle('liked', liked[i]);
+          document.getElementById(`hearticon-${i}`).className = liked[i] ? 'ti ti-heart-filled' : 'ti ti-heart';
+          localStorage.setItem('story-likes', JSON.stringify(liked));
+        });
+      });
+
+      /* ── Restore saved likes ── */
+      Object.keys(liked).forEach(k => {
+        if (!liked[k]) return;
+        const btn = document.getElementById(`heart-${k}`);
+        if (btn) {
+          btn.classList.add('liked');
+          document.getElementById(`hearticon-${k}`).className = 'ti ti-heart-filled';
         }
       });
 
-      document.getElementById(`track-${i}`).addEventListener('click', (e) => {
-        if (!audio.duration) return;
-        const rect = e.currentTarget.getBoundingClientRect();
-        audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+      /* ── Scroll reveal ── */
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.story-card').forEach((c, i) => {
+        c.style.transitionDelay = `${i * 0.04}s`;
+        io.observe(c);
       });
+    }
 
-      document.getElementById(`heart-${i}`).addEventListener('click', function () {
-        liked[i] = !liked[i];
-        this.classList.toggle('liked', liked[i]);
-        document.getElementById(`hearticon-${i}`).className = liked[i] ? 'ti ti-heart-filled' : 'ti ti-heart';
-        localStorage.setItem('story-likes', JSON.stringify(liked));
+    /* ── Load stories from JSON ── */
+    fetch('stories.json')
+      .then(r => r.json())
+      .then(stories => buildCards(stories))
+      .catch(err => {
+        console.error('Could not load stories.json:', err);
+        list.innerHTML = '<p style="text-align:center;color:#888;padding:2rem">Could not load stories.</p>';
       });
-    });
-
-    /* ── Restore saved likes ── */
-    Object.keys(liked).forEach(k => {
-      if (!liked[k]) return;
-      const btn = document.getElementById(`heart-${k}`);
-      if (btn) {
-        btn.classList.add('liked');
-        document.getElementById(`hearticon-${k}`).className = 'ti ti-heart-filled';
-      }
-    });
-
-    /* ── Scroll reveal ── */
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.story-card').forEach((c, i) => {
-      c.style.transitionDelay = `${i * 0.04}s`;
-      io.observe(c);
-    });
   </script>
 
 </body>
