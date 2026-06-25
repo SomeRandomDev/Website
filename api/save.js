@@ -4,16 +4,26 @@ const BRANCH     = 'main';
 const FILE_PATH  = 'entries.json';
 
 export default async function handler(req, res) {
-  // ── CORS headers ──
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-password');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // ── Password check ──
-  const password = req.headers['x-password'];
-  if (password !== process.env.WRITE_PASSWORD) {
+  // ── Debug: show what we received vs what we expect ──
+  const received = req.headers['x-password'];
+  const expected = process.env.WRITE_PASSWORD;
+
+  if (req.method === 'GET' && req.query.debug === '1') {
+    return res.status(200).json({
+      received_header: received ?? 'undefined',
+      env_set: expected !== undefined,
+      env_length: expected?.length ?? 0,
+      match: received === expected,
+    });
+  }
+
+  if (received !== expected) {
     return res.status(401).json({ error: 'Wrong password' });
   }
 
@@ -27,7 +37,6 @@ export default async function handler(req, res) {
     'Content-Type': 'application/json',
   };
 
-  // ── GET: return current entries ──
   if (req.method === 'GET') {
     try {
       const r = await fetch(`${apiBase}?ref=${BRANCH}`, { headers });
@@ -40,7 +49,6 @@ export default async function handler(req, res) {
     }
   }
 
-  // ── POST: save updated entries ──
   if (req.method === 'POST') {
     try {
       const { entries, sha } = req.body;
