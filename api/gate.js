@@ -1,11 +1,8 @@
-import { SignJWT } from 'jose';
-
 function normalize(str) {
   return str.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-export default async function handler(req, res) {
-  // GET: just returns the question text for gate.html to display
+module.exports = async function handler(req, res) {
   if (req.method === 'GET') {
     return res.status(200).json({ question: process.env.SITE_QUESTION });
   }
@@ -16,6 +13,8 @@ export default async function handler(req, res) {
     if (normalize(answer || '') !== normalize(process.env.SITE_ANSWER)) {
       return res.status(401).json({ ok: false });
     }
+
+    const { SignJWT } = await import('jose');
 
     const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
     const token = await new SignJWT({ ok: true })
@@ -31,4 +30,4 @@ export default async function handler(req, res) {
   }
 
   res.status(405).end();
-}
+};
