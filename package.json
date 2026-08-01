@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
+    "jose": "^6.2.7",
     "pug": "^3.0.3"
   }
 }
