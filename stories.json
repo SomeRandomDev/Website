@@ -1,7 +1,8 @@
 [
-  { "title": "Meditation",                                    "src": "AUDIO/Mindfullness.mp3" },
-  { "title": "The rainbowfish + Oh no, the Leaves are Gone", "src": "AUDIO/fallleave.mp3" },
-  { "title": "Richard the Meerkat and the Little Gecko",     "src": "AUDIO/Richardthemeerkatandthelittlegecko.mp3" },
-  { "title": "Princess Jessie and the Unicorn",              "src": "AUDIO/PrincessJessieandtheUnicorn.mp3" },
-  { "title": "The bird girl",                                "src": "AUDIO/junglebird.mp3" }
+  { "title": "bella the beaver and the river",                                    "src": "AUDIO/bellathebeaverandtheriver.mp3" },
+  { "title": "meditation",                                                        "src": "AUDIO/Mindfullness.mp3" },
+  { "title": "the rainbowfish + oh no, the Leaves are gone",                      "src": "AUDIO/fallleave.mp3" },
+  { "title": "richard the meerkat and the little gecko",                          "src": "AUDIO/Richardthemeerkatandthelittlegecko.mp3" },
+  { "title": "princess jessie and the unicorn",                                   "src": "AUDIO/PrincessJessieandtheUnicorn.mp3" },
+  { "title": "the bird girl",                                                     "src": "AUDIO/junglebird.mp3" }
 ]
