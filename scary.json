@@ -1,5 +1,6 @@
 [
-  { "title": "i found my son's notebook",                                                   "src": "AUDIO/Ifoundmysonsnotebook.mp3" },
+  { "title": "my girlfriend came back from a trip she never went to",                        "src": "AUDIO/girlfriendcamebackfromatrip.mp3" },
+  { "title": "i found my son's notebook",                                                    "src": "AUDIO/Ifoundmysonsnotebook.mp3" },
   { "title": "don't be here after sunset",                                                   "src": "AUDIO/dontbehereaftersunset.mp3" },
   { "title": "i wish my daughter hadn't survived her accident",                              "src": "AUDIO/daughteraccident.mp3" },
   { "title": "one of us had to die",                                                         "src": "AUDIO/Oneofushadtodie.mp3" },
@@ -9,11 +10,11 @@
   { "title": "daddy's never gonna hurt you again",                                           "src": "AUDIO/NeverGonnaHurtYouAgain.mp3" },
   { "title": "my girlfriend talks in her sleep",                                             "src": "AUDIO/MyGirlfriendTalksinHerSleep.mp3" },
   { "title": "if they call your name, never answer",                                         "src": "AUDIO/neveranswer.mp3" },
-  { "title": "i found a hidden door in my basement. i wish i had never opened it",         "src": "AUDIO/hiddenbasementdoor.mp3" },
-  { "title": "my online film student kept filming the same dead oak tree",                  "src": "AUDIO/deadoaktree.mp3" },
-  { "title": "he has no face",                                                              "src": "AUDIO/hehasnoface.mp3" },
-  { "title": "my boyfriend is obsessed with me when i get sick. i just discovered why",    "src": "AUDIO/sneeze.mp3" },
+  { "title": "i found a hidden door in my basement. i wish i had never opened it",           "src": "AUDIO/hiddenbasementdoor.mp3" },
+  { "title": "my online film student kept filming the same dead oak tree",                   "src": "AUDIO/deadoaktree.mp3" },
+  { "title": "he has no face",                                                               "src": "AUDIO/hehasnoface.mp3" },
+  { "title": "my boyfriend is obsessed with me when i get sick. i just discovered why",      "src": "AUDIO/sneeze.mp3" },
   { "title": "emergency alert part1",                                                        "src": "AUDIO/emergencyalert.mp3" },
-  { "title": "search and rescue officer for the us forest service",                         "src": "AUDIO/SAROfficer.mp3" },
-  { "title": "something went wrong with my heart transplant",                               "src": "AUDIO/hearttransplant.mp3" }
+  { "title": "search and rescue officer for the us forest service",                          "src": "AUDIO/SAROfficer.mp3" },
+  { "title": "something went wrong with my heart transplant",                                "src": "AUDIO/hearttransplant.mp3" }
 ]
