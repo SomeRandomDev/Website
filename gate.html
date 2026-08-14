@@ -19,6 +19,11 @@
     <p id="error">That's not it.</p>
   </form>
 
+  <script type="module">
+    import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1.6.1/dist/index.mjs';
+    inject();
+  </script>
+
   <script>
     // Question text is passed in via a small API call so it's not hardcoded twice
     fetch('/api/gate?question=1')
