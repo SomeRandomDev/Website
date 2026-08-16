@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz</title>
+</head>
+<body>
+  <form id="quizForm">
+    <p>Question 1...</p>
+    <input type="text" name="q1" />
+
+    <p>Question 2...</p>
+    <input type="text" name="q2" />
+
+    <button type="submit">Envoyer</button>
+  </form>
+  <p id="thanks" style="display:none;">Merci !</p>
+
+  <script type="module">
+    import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1.6.1/dist/index.mjs';
+    inject();
+  </script>
+
+  <script>
+    document.getElementById('quizForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const answers = Object.fromEntries(formData.entries());
+
+      await fetch('/api/save-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ answers }),
+      });
+
+      document.getElementById('quizForm').style.display = 'none';
+      document.getElementById('thanks').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
