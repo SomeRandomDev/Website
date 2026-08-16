@@ -9,11 +9,29 @@
     <p>Question 1...</p>
     <input type="text" name="q1" />
 
-    <p>Question 2...fvbzuoefhvbzefbvjz vbv zefvbjhzefbvjhz ebvjhb ezjhvbzejvb jzehdb vjezhbvjzebfvjhbzejfvb jzehfb vjebfv jhzefv</p>
+    <p>Question 2...</p>
     <input type="text" name="q2" />
 
-    <button type="submit">Send</button>
-  </form>
+    <fieldset>
+      <legend>Quelle est ta couleur préférée ?</legend>
+      <label><input type="radio" name="q3" value="Bleu"> Bleu</label><br>
+      <label><input type="radio" name="q3" value="Rouge"> Rouge</label><br>
+      <label><input type="radio" name="q3" value="Vert"> Vert</label><br>
+      <label>
+        <input type="radio" name="q3" value="autre" id="q3-other-radio"> Autre :
+      </label>
+      <textarea
+        name="q3-other-text"
+        id="q3-other-text"
+        disabled
+        rows="6"
+        placeholder="Écris ici..."
+        style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
+      ></textarea>
+  </fieldset>
+
+  <button type="submit">Envoyer</button>
+</form>
   <p id="thanks" style="display:none;">Thanks a lot for taking the time to answer me !</p>
 
   <script type="module">
