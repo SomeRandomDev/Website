@@ -55,5 +55,18 @@
       document.getElementById('thanks').style.display = 'block';
     });
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const otherRadio = document.getElementById('q3-other-radio');
+    const otherText = document.getElementById('q3-other-text');
+
+    document.querySelectorAll('input[name="q3"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        otherText.disabled = radio !== otherRadio;
+        if (radio === otherRadio) otherText.focus();
+      });
+    });
+  });
+</script>
 </body>
 </html>
