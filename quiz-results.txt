@@ -24,3 +24,10 @@
   "q3": "autre",
   "q3-other-text": "cdf fvk, ber e\n e\n \netg \netg\n \netg \ne\ntg \negt\n \neg g "
 }
+
+--- 16/08/2026 23:04:57 (2026-08-16T21:04:57.724Z) ---
+{
+  "q1": "Yes it made me feel worse many times ",
+  "q2": "Not really I am able to not think about you ",
+  "q3": "Sometimes yes "
+}
