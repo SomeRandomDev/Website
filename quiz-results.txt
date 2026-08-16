@@ -16,3 +16,11 @@
   "q1": "zdzdz",
   "q2": "zdzdz"
 }
+
+--- 16/08/2026 22:38:38 (2026-08-16T20:38:38.922Z) ---
+{
+  "q1": "rgbtg",
+  "q2": "fvrbt",
+  "q3": "autre",
+  "q3-other-text": "cdf fvk, ber e\n e\n \netg \netg\n \netg \ne\ntg \negt\n \neg g "
+}
