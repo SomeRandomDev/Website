@@ -8,16 +8,8 @@
   <form id="quizForm">
     <fieldset>
       <legend>Qu 1 ?</legend>
-      <label><input type="radio" name="q1" value="Bleu"> Bleu</label><br>
-      <label><input type="radio" name="q1" value="Rouge"> Rouge</label><br>
-      <label><input type="radio" name="q1" value="Vert"> Vert</label><br>
-      <label>
-        <input type="radio" name="q1" value="autre" id="q1-other-radio"> Autre :
-      </label>
       <textarea
-        name="q1-other-text"
-        id="q1-other-text"
-        disabled
+        name="q1"
         rows="6"
         placeholder="Please write here..."
         style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
@@ -26,16 +18,8 @@
 
     <fieldset>
       <legend>Qu2 ?</legend>
-      <label><input type="radio" name="q2" value="Bleu"> Bleu</label><br>
-      <label><input type="radio" name="q2" value="Rouge"> Rouge</label><br>
-      <label><input type="radio" name="q2" value="Vert"> Vert</label><br>
-      <label>
-        <input type="radio" name="q2" value="autre" id="q2-other-radio"> Autre :
-      </label>
       <textarea
-        name="q2-other-text"
-        id="q2-other-text"
-        disabled
+        name="q2"
         rows="6"
         placeholder="Please write here..."
         style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
@@ -44,16 +28,8 @@
 
     <fieldset>
       <legend>Qu 3 ?</legend>
-      <label><input type="radio" name="q3" value="Bleu"> Bleu</label><br>
-      <label><input type="radio" name="q3" value="Rouge"> Rouge</label><br>
-      <label><input type="radio" name="q3" value="Vert"> Vert</label><br>
-      <label>
-        <input type="radio" name="q3" value="autre" id="q3-other-radio"> Autre :
-      </label>
       <textarea
-        name="q3-other-text"
-        id="q3-other-text"
-        disabled
+        name="q3"
         rows="6"
         placeholder="Please write here..."
         style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
@@ -75,13 +51,6 @@
       const formData = new FormData(e.target);
       const answers = Object.fromEntries(formData.entries());
 
-      ['q1', 'q2', 'q3'].forEach(q => {
-        if (answers[q] === 'autre' && answers[`${q}-other-text`]) {
-          answers[q] = answers[`${q}-other-text`];
-        }
-        delete answers[`${q}-other-text`];
-      });
-
       await fetch('/api/save-quiz', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -90,26 +59,6 @@
 
       document.getElementById('quizForm').style.display = 'none';
       document.getElementById('thanks').style.display = 'block';
-    });
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      function setupOtherToggle(questionName) {
-        const otherRadio = document.getElementById(`${questionName}-other-radio`);
-        const otherText = document.getElementById(`${questionName}-other-text`);
-
-        document.querySelectorAll(`input[name="${questionName}"]`).forEach(radio => {
-          radio.addEventListener('change', () => {
-            otherText.disabled = radio !== otherRadio;
-            if (radio === otherRadio) otherText.focus();
-          });
-        });
-      }
-
-      setupOtherToggle('q1');
-      setupOtherToggle('q2');
-      setupOtherToggle('q3');
     });
   </script>
 </body>
