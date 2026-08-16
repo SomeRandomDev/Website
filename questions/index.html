@@ -6,14 +6,44 @@
 </head>
 <body>
   <form id="quizForm">
-    <p>Question 1...</p>
-    <input type="text" name="q1" />
-
-    <p>Question 2...</p>
-    <input type="text" name="q2" />
+    <fieldset>
+      <legend>Qu 1 ?</legend>
+      <label><input type="radio" name="q1" value="Bleu"> Bleu</label><br>
+      <label><input type="radio" name="q1" value="Rouge"> Rouge</label><br>
+      <label><input type="radio" name="q1" value="Vert"> Vert</label><br>
+      <label>
+        <input type="radio" name="q1" value="autre" id="q1-other-radio"> Autre :
+      </label>
+      <textarea
+        name="q1-other-text"
+        id="q1-other-text"
+        disabled
+        rows="6"
+        placeholder="Please write here..."
+        style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
+      ></textarea>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Qu2 ?</legend>
+      <label><input type="radio" name="q2" value="Bleu"> Bleu</label><br>
+      <label><input type="radio" name="q2" value="Rouge"> Rouge</label><br>
+      <label><input type="radio" name="q2" value="Vert"> Vert</label><br>
+      <label>
+        <input type="radio" name="q2" value="autre" id="q2-other-radio"> Autre :
+      </label>
+      <textarea
+        name="q2-other-text"
+        id="q2-other-text"
+        disabled
+        rows="6"
+        placeholder="Please write here..."
+        style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
+      ></textarea>
+    </fieldset>
 
     <fieldset>
-      <legend>Quelle est ta couleur préférée ?</legend>
+      <legend>Qu 3 ?</legend>
       <label><input type="radio" name="q3" value="Bleu"> Bleu</label><br>
       <label><input type="radio" name="q3" value="Rouge"> Rouge</label><br>
       <label><input type="radio" name="q3" value="Vert"> Vert</label><br>
@@ -25,10 +55,10 @@
         id="q3-other-text"
         disabled
         rows="6"
-        placeholder="Écris ici..."
+        placeholder="Please write here..."
         style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
       ></textarea>
-  </fieldset>
+    </fieldset>
 
   <button type="submit">Envoyer</button>
 </form>
@@ -57,10 +87,10 @@
   </script>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const otherRadio = document.getElementById('q3-other-radio');
-    const otherText = document.getElementById('q3-other-text');
+    const otherRadio = document.getElementById('q2-other-radio');
+    const otherText = document.getElementById('q2-other-text');
 
-    document.querySelectorAll('input[name="q3"]').forEach(radio => {
+    document.querySelectorAll('input[name="q2 "]').forEach(radio => {
       radio.addEventListener('change', () => {
         otherText.disabled = radio !== otherRadio;
         if (radio === otherRadio) otherText.focus();
