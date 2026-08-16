@@ -23,7 +23,7 @@
         style="width: 100%; font-size: 1rem; padding: 10px; margin-top: 8px; box-sizing: border-box; border-radius: 8px;"
       ></textarea>
     </fieldset>
-    
+
     <fieldset>
       <legend>Qu2 ?</legend>
       <label><input type="radio" name="q2" value="Bleu"> Bleu</label><br>
@@ -60,8 +60,8 @@
       ></textarea>
     </fieldset>
 
-  <button type="submit">Envoyer</button>
-</form>
+    <button type="submit">Envoyer</button>
+  </form>
   <p id="thanks" style="display:none;">Thanks a lot for taking the time to answer me !</p>
 
   <script type="module">
@@ -75,6 +75,13 @@
       const formData = new FormData(e.target);
       const answers = Object.fromEntries(formData.entries());
 
+      ['q1', 'q2', 'q3'].forEach(q => {
+        if (answers[q] === 'autre' && answers[`${q}-other-text`]) {
+          answers[q] = answers[`${q}-other-text`];
+        }
+        delete answers[`${q}-other-text`];
+      });
+
       await fetch('/api/save-quiz', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -85,18 +92,25 @@
       document.getElementById('thanks').style.display = 'block';
     });
   </script>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const otherRadio = document.getElementById('q2-other-radio');
-    const otherText = document.getElementById('q2-other-text');
 
-    document.querySelectorAll('input[name="q2 "]').forEach(radio => {
-      radio.addEventListener('change', () => {
-        otherText.disabled = radio !== otherRadio;
-        if (radio === otherRadio) otherText.focus();
-      });
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      function setupOtherToggle(questionName) {
+        const otherRadio = document.getElementById(`${questionName}-other-radio`);
+        const otherText = document.getElementById(`${questionName}-other-text`);
+
+        document.querySelectorAll(`input[name="${questionName}"]`).forEach(radio => {
+          radio.addEventListener('change', () => {
+            otherText.disabled = radio !== otherRadio;
+            if (radio === otherRadio) otherText.focus();
+          });
+        });
+      }
+
+      setupOtherToggle('q1');
+      setupOtherToggle('q2');
+      setupOtherToggle('q3');
     });
-  });
-</script>
+  </script>
 </body>
 </html>
