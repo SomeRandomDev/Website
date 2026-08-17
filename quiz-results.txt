@@ -65,3 +65,12 @@
   "q4": "If you answered \"yes\" to any of the previous questions, would you say that I need to remove the website entirely ? Or maybe should I remove the diary section ? Keep it?",
   "q5": "Is there one last thing you would like to say ? One final thing you would like me to know ?"
 }
+
+--- 17/08/2026 16:49:26 (2026-08-17T14:49:26.131Z) ---
+{
+  "q1": "Tes",
+  "q2": "Gg",
+  "q3": "G",
+  "q4": "F",
+  "q5": "Verdi pour github"
+}
