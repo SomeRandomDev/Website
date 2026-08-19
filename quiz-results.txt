@@ -47,3 +47,66 @@
   "q3": "z",
   "q4": "d"
 }
+
+--- 17/08/2026 00:12:00 (2026-08-16T22:12:00.069Z) ---
+{
+  "q1": "I don’t know ",
+  "q2": "Leave me alone",
+  "q3": "It’s time to stop karim",
+  "q4": "Delete it",
+  "q5": "I love him "
+}
+
+--- 17/08/2026 08:09:57 (2026-08-17T06:09:57.517Z) ---
+{
+  "q1": "Would you say you feel worse after visiting the diary section ? Same question for the other sections",
+  "q2": "Would you say this website has prevented you from moving on ?\n",
+  "q3": "Do you feel like you have to come here ?",
+  "q4": "If you answered \"yes\" to any of the previous questions, would you say that I need to remove the website entirely ? Or maybe should I remove the diary section ? Keep it?",
+  "q5": "Is there one last thing you would like to say ? One final thing you would like me to know ?"
+}
+
+--- 17/08/2026 16:49:26 (2026-08-17T14:49:26.131Z) ---
+{
+  "q1": "Tes",
+  "q2": "Gg",
+  "q3": "G",
+  "q4": "F",
+  "q5": "Verdi pour github"
+}
+
+--- 17/08/2026 19:51:17 (2026-08-17T17:51:17.848Z) ---
+{
+  "q1": "ef",
+  "q2": "eee",
+  "q3": "e",
+  "q4": "e",
+  "q5": "e"
+}
+
+--- 19/08/2026 07:07:56 (2026-08-19T05:07:56.385Z) ---
+{
+  "q1": "D",
+  "q2": "E",
+  "q3": "R",
+  "q4": "F",
+  "q5": "F"
+}
+
+--- 19/08/2026 18:09:57 (2026-08-19T16:09:57.199Z) ---
+{
+  "q1": "delete",
+  "q2": "the",
+  "q3": "website",
+  "q4": "im",
+  "q5": "happy"
+}
+
+--- 19/08/2026 20:45:39 (2026-08-19T18:45:39.266Z) ---
+{
+  "q1": "Delete ",
+  "q2": "The",
+  "q3": "Website",
+  "q4": "Im",
+  "q5": "Happy"
+}
