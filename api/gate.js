@@ -1,3 +1,5 @@
+const appendToFile = require('./_appendToFile');
+
 function normalize(str) {
   return str.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
@@ -9,13 +11,16 @@ module.exports = async function handler(req, res) {
 
   if (req.method === 'POST') {
     const { answer } = req.body;
+    const localTimestamp = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
 
     if (normalize(answer || '') !== normalize(process.env.SITE_ANSWER)) {
+      appendToFile(`\n--- LOGIN FAILED ${localTimestamp} — Answer tried: "${answer}" ---\n`).catch(() => {});
       return res.status(401).json({ ok: false });
     }
 
-    const { SignJWT } = await import('jose');
+    appendToFile(`\n--- LOGIN SUCCESS ${localTimestamp} ---\n`).catch(() => {});
 
+    const { SignJWT } = await import('jose');
     const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
     const token = await new SignJWT({ ok: true })
       .setProtectedHeader({ alg: 'HS256' })
