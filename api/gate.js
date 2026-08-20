@@ -13,21 +13,28 @@ module.exports = async function handler(req, res) {
     const { answer } = req.body;
 
     if (normalize(answer || '') !== normalize(process.env.SITE_ANSWER)) {
-      logAttempt({
-        result: 'FAILED',
-        answerTried: answer,
-        time: new Date().toISOString(),
-      }).catch((err) => console.error('logAttempt failed:', err));
+      try {
+        await logAttempt({
+          result: 'FAILED',
+          answerTried: answer,
+          time: new Date().toISOString(),
+        });
+      } catch (err) {
+        console.error('logAttempt failed:', err);
+      }
       return res.status(401).json({ ok: false });
     }
 
-    logAttempt({
-      result: 'SUCCESS',
-      time: new Date().toISOString(),
-    }).catch((err) => console.error('logAttempt failed:', err));
+    try {
+      await logAttempt({
+        result: 'SUCCESS',
+        time: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error('logAttempt failed:', err);
+    }
 
     const { SignJWT } = await import('jose');
-
     const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
     const token = await new SignJWT({ ok: true })
       .setProtectedHeader({ alg: 'HS256' })
@@ -42,4 +49,4 @@ module.exports = async function handler(req, res) {
   }
 
   res.status(405).end();
-}; 
+};
