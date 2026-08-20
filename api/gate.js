@@ -17,14 +17,14 @@ module.exports = async function handler(req, res) {
         result: 'FAILED',
         answerTried: answer,
         time: new Date().toISOString(),
-      }).catch(() => {});
+      }).catch((err) => console.error('logAttempt failed:', err));
       return res.status(401).json({ ok: false });
     }
 
     logAttempt({
       result: 'SUCCESS',
       time: new Date().toISOString(),
-    }).catch(() => {});
+    }).catch((err) => console.error('logAttempt failed:', err));
 
     const { SignJWT } = await import('jose');
 
@@ -42,4 +42,4 @@ module.exports = async function handler(req, res) {
   }
 
   res.status(405).end();
-};
+}; 
