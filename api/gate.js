@@ -17,7 +17,7 @@ module.exports = async function handler(req, res) {
         await logAttempt({
           result: 'FAILED',
           answerTried: answer,
-          time: new Date().toISOString(),
+          time: new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }),
         });
       } catch (err) {
         console.error('logAttempt failed:', err);
@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
     try {
       await logAttempt({
         result: 'SUCCESS',
-        time: new Date().toISOString(),
+        time: new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }),
       });
     } catch (err) {
       console.error('logAttempt failed:', err);
